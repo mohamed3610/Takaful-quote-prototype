@@ -575,7 +575,7 @@
 
             <!-- Welcome Screen -->
             <div class="welcome-screen" id="welcomeScreen">
-                <div class="welcome-icon">🏠</div>
+                <div class="welcome-icon">🏡</div>
                 <h2 class="welcome-title">Welcome to Takaful Home Insurance</h2>
                 <p class="welcome-subtitle">
                     Get a personalized, Shariah-compliant home insurance quote in just a few minutes. 
@@ -648,7 +648,7 @@
         let userData = {};
         let isRegisteredUser = false;
         
-        // Conversation flow
+        // Updated conversation flow based on database schema
         const conversationFlow = [
             // Step 0: Check if user is registered
             {
@@ -712,32 +712,65 @@
                 type: 'input',
                 inputType: 'tel',
                 placeholder: '+1 (555) 123-4567',
-                field: 'phone',
+                field: 'phone_number',
                 validation: (value) => value.replace(/\D/g, '').length >= 10
             },
             
-            // Step 4: Home address
+            // Step 4: Home address - Street Address
             {
-                id: 'home_address',
-                message: "Now let's talk about your home! 🏠\n\nWhat's the full address of the property you'd like to insure?",
+                id: 'street_address',
+                message: "Now let's talk about your home! 🏠\n\nWhat's the street address of the property you'd like to insure?",
                 type: 'input',
                 inputType: 'text',
-                placeholder: '123 Main Street, City, State, ZIP',
-                field: 'address',
-                validation: (value) => value.trim().length >= 10
+                placeholder: '123 Main Street',
+                field: 'street_address',
+                validation: (value) => value.trim().length >= 5
             },
             
-            // Step 5: Home type
+            // Step 5: City
             {
-                id: 'home_type',
-                message: "Perfect! What type of home is this?",
+                id: 'city',
+                message: "What city is your home located in?",
+                type: 'input',
+                inputType: 'text',
+                placeholder: 'Enter city name',
+                field: 'city',
+                validation: (value) => value.trim().length >= 2
+            },
+            
+            // Step 6: State
+            {
+                id: 'state',
+                message: "Which state is your property in?",
+                type: 'input',
+                inputType: 'text',
+                placeholder: 'CA, NY, TX, etc.',
+                field: 'state',
+                validation: (value) => value.trim().length >= 2
+            },
+            
+            // Step 7: ZIP Code
+            {
+                id: 'zip_code',
+                message: "What's the ZIP code for your property?",
+                type: 'input',
+                inputType: 'text',
+                placeholder: '12345 or 12345-6789',
+                field: 'zip_code',
+                validation: (value) => /^\d{5}(-\d{4})?$/.test(value.trim())
+            },
+            
+            // Step 8: Property Type
+            {
+                id: 'property_type',
+                message: "Perfect! What type of property is this?",
                 type: 'options',
                 options: [
                     {
-                        text: "Single-Family House",
-                        value: 'house',
+                        text: "Single Family Home",
+                        value: 'single_family',
                         icon: '🏠',
-                        desc: 'Detached single-family home'
+                        desc: 'Detached single-family house'
                     },
                     {
                         text: "Apartment/Condo",
@@ -752,99 +785,353 @@
                         desc: 'Attached home in a row'
                     },
                     {
-                        text: "Other",
-                        value: 'other',
-                        icon: '🏗️',
-                        desc: 'Different type of property'
-                    }
-                ],
-                field: 'home_type'
-            },
-            
-            // Step 6: Home age
-            {
-                id: 'home_age',
-                message: "When was your home built? This helps us determine the right coverage for you.",
-                type: 'options',
-                options: [
-                    {
-                        text: "2020 or newer",
-                        value: '2020+',
-                        icon: '✨',
-                        desc: 'Very new construction'
-                    },
-                    {
-                        text: "2010-2019",
-                        value: '2010-2019',
-                        icon: '🆕',
-                        desc: 'Modern construction'
-                    },
-                    {
-                        text: "2000-2009",
-                        value: '2000-2009',
+                        text: "Duplex",
+                        value: 'duplex',
                         icon: '🏠',
-                        desc: 'Recent construction'
-                    },
-                    {
-                        text: "1990-1999",
-                        value: '1990-1999',
-                        icon: '🏘️',
-                        desc: 'Established home'
-                    },
-                    {
-                        text: "Before 1990",
-                        value: 'pre-1990',
-                        icon: '🏛️',
-                        desc: 'Mature/historic home'
+                        desc: 'Two-unit residential building'
                     }
                 ],
-                field: 'home_age'
+                field: 'property_type'
             },
             
-            // Step 7: Estimated home value
+            // Step 9: Construction Year
+            {
+                id: 'construction_year',
+                message: "When was your home built? (Enter the year)",
+                type: 'input',
+                inputType: 'number',
+                placeholder: '1995',
+                field: 'construction_year',
+                validation: (value) => {
+                    const year = parseInt(value);
+                    return year >= 1800 && year <= new Date().getFullYear() + 1;
+                }
+            },
+            
+            // Step 10: Home Value
             {
                 id: 'home_value',
-                message: "What's the estimated value of your home? Don't worry if you're not exactly sure - we can adjust this later.",
+                message: "What's the estimated value of your home? (Enter amount in dollars)",
+                type: 'input',
+                inputType: 'number',
+                placeholder: '350000',
+                field: 'home_value',
+                validation: (value) => parseInt(value) >= 50000
+            },
+            
+            // Step 11: Square Footage
+            {
+                id: 'square_footage',
+                message: "How many square feet is your home? (approximate is fine)",
+                type: 'input',
+                inputType: 'number',
+                placeholder: '2000',
+                field: 'square_footage',
+                validation: (value) => parseInt(value) >= 400
+            },
+            
+            // Step 12: Construction Material
+            {
+                id: 'construction_material',
+                message: "What is your home primarily made of?",
                 type: 'options',
                 options: [
                     {
-                        text: "Under $200,000",
-                        value: '0-200k',
-                        icon: '💰',
-                        desc: 'Starter home range'
+                        text: "Frame (Wood)",
+                        value: 'frame',
+                        icon: '🌲',
+                        desc: 'Traditional wood frame construction'
                     },
                     {
-                        text: "$200,000 - $400,000",
-                        value: '200k-400k',
-                        icon: '💎',
-                        desc: 'Mid-range home'
+                        text: "Masonry (Brick/Stone)",
+                        value: 'masonry',
+                        icon: '🧱',
+                        desc: 'Brick, stone, or block construction'
                     },
                     {
-                        text: "$400,000 - $600,000",
-                        value: '400k-600k',
-                        icon: '🏆',
-                        desc: 'Upper mid-range'
+                        text: "Steel",
+                        value: 'steel',
+                        icon: '🏗️',
+                        desc: 'Steel frame construction'
                     },
                     {
-                        text: "$600,000 - $1,000,000",
-                        value: '600k-1m',
-                        icon: '👑',
-                        desc: 'Luxury home'
-                    },
-                    {
-                        text: "Over $1,000,000",
-                        value: '1m+',
-                        icon: '🌟',
-                        desc: 'Premium property'
+                        text: "Mixed/Other",
+                        value: 'mixed',
+                        icon: '🏠',
+                        desc: 'Combination or other materials'
                     }
                 ],
-                field: 'home_value'
+                field: 'construction_material'
             },
             
-            // Step 8: Coverage preference
+            // Step 13: Roof Type
+            {
+                id: 'roof_type',
+                message: "What type of roof does your home have?",
+                type: 'options',
+                options: [
+                    {
+                        text: "Composition Shingle",
+                        value: 'composition_shingle',
+                        icon: '🏠',
+                        desc: 'Standard asphalt shingles'
+                    },
+                    {
+                        text: "Tile",
+                        value: 'tile',
+                        icon: '🏛️',
+                        desc: 'Clay or concrete tiles'
+                    },
+                    {
+                        text: "Metal",
+                        value: 'metal',
+                        icon: '⚡',
+                        desc: 'Metal roofing'
+                    },
+                    {
+                        text: "Slate",
+                        value: 'slate',
+                        icon: '🪨',
+                        desc: 'Natural slate roofing'
+                    },
+                    {
+                        text: "Other",
+                        value: 'other',
+                        icon: '🏠',
+                        desc: 'Different roofing material'
+                    }
+                ],
+                field: 'roof_type'
+            },
+            
+            // Step 14: Foundation Type
+            {
+                id: 'foundation_type',
+                message: "What type of foundation does your home have?",
+                type: 'options',
+                options: [
+                    {
+                        text: "Slab",
+                        value: 'slab',
+                        icon: '⬜',
+                        desc: 'Concrete slab foundation'
+                    },
+                    {
+                        text: "Crawl Space",
+                        value: 'crawl_space',
+                        icon: '🏠',
+                        desc: 'Raised foundation with crawl space'
+                    },
+                    {
+                        text: "Basement",
+                        value: 'basement',
+                        icon: '🏠',
+                        desc: 'Full or partial basement'
+                    },
+                    {
+                        text: "Pier/Post",
+                        value: 'pier_post',
+                        icon: '🏗️',
+                        desc: 'Raised on piers or posts'
+                    }
+                ],
+                field: 'foundation_type'
+            },
+            
+            // Step 15: Number of Stories
+            {
+                id: 'stories',
+                message: "How many stories is your home?",
+                type: 'options',
+                options: [
+                    {
+                        text: "1 Story",
+                        value: '1',
+                        icon: '🏠',
+                        desc: 'Single-story home'
+                    },
+                    {
+                        text: "2 Stories",
+                        value: '2',
+                        icon: '🏢',
+                        desc: 'Two-story home'
+                    },
+                    {
+                        text: "3+ Stories",
+                        value: '3',
+                        icon: '🏗️',
+                        desc: 'Three or more stories'
+                    }
+                ],
+                field: 'stories'
+            },
+            
+            // Step 16: Bedrooms
+            {
+                id: 'bedrooms',
+                message: "How many bedrooms does your home have?",
+                type: 'input',
+                inputType: 'number',
+                placeholder: '3',
+                field: 'bedrooms',
+                validation: (value) => parseInt(value) >= 1 && parseInt(value) <= 20
+            },
+            
+            // Step 17: Bathrooms
+            {
+                id: 'bathrooms',
+                message: "How many bathrooms does your home have? (include half baths)",
+                type: 'input',
+                inputType: 'number',
+                placeholder: '2',
+                field: 'bathrooms',
+                validation: (value) => parseInt(value) >= 1 && parseInt(value) <= 20
+            },
+            
+            // Step 18: Garage
+            {
+                id: 'garage',
+                message: "Does your home have a garage?",
+                type: 'options',
+                options: [
+                    {
+                        text: "Yes, attached garage",
+                        value: 'attached',
+                        icon: '🚗',
+                        desc: 'Garage attached to house'
+                    },
+                    {
+                        text: "Yes, detached garage",
+                        value: 'detached',
+                        icon: '🏠',
+                        desc: 'Separate garage building'
+                    },
+                    {
+                        text: "No garage",
+                        value: 'none',
+                        icon: '🚫',
+                        desc: 'No garage on property'
+                    }
+                ],
+                field: 'garage'
+            },
+            
+            // Step 19: Pool
+            {
+                id: 'pool',
+                message: "Do you have a swimming pool on your property?",
+                type: 'options',
+                options: [
+                    {
+                        text: "Yes, in-ground pool",
+                        value: 'inground',
+                        icon: '🏊‍♀️',
+                        desc: 'Permanent in-ground swimming pool'
+                    },
+                    {
+                        text: "Yes, above-ground pool",
+                        value: 'aboveground',
+                        icon: '🏊‍♂️',
+                        desc: 'Above-ground pool'
+                    },
+                    {
+                        text: "No pool",
+                        value: 'none',
+                        icon: '🚫',
+                        desc: 'No swimming pool'
+                    }
+                ],
+                field: 'pool'
+            },
+            
+            // Step 20: Safety Features - Smoke Detectors
+            {
+                id: 'smoke_detectors',
+                message: "Great! Now let's talk about safety features. 🛡️\n\nDoes your home have working smoke detectors?",
+                type: 'options',
+                options: [
+                    {
+                        text: "Yes, hardwired",
+                        value: 'hardwired',
+                        icon: '🔥',
+                        desc: 'Permanent hardwired smoke detectors'
+                    },
+                    {
+                        text: "Yes, battery powered",
+                        value: 'battery',
+                        icon: '🔋',
+                        desc: 'Battery-powered smoke detectors'
+                    },
+                    {
+                        text: "No",
+                        value: 'none',
+                        icon: '🚫',
+                        desc: 'No smoke detectors installed'
+                    }
+                ],
+                field: 'smoke_detectors'
+            },
+            
+            // Step 21: Security System
+            {
+                id: 'security_system',
+                message: "Do you have a security/alarm system?",
+                type: 'options',
+                options: [
+                    {
+                        text: "Yes, monitored system",
+                        value: 'monitored',
+                        icon: '🔒',
+                        desc: 'Professional monitoring service'
+                    },
+                    {
+                        text: "Yes, self-monitored",
+                        value: 'self_monitored',
+                        icon: '📱',
+                        desc: 'DIY/self-monitored system'
+                    },
+                    {
+                        text: "No security system",
+                        value: 'none',
+                        icon: '🚫',
+                        desc: 'No alarm system installed'
+                    }
+                ],
+                field: 'security_system'
+            },
+            
+            // Step 22: Previous Claims
+            {
+                id: 'previous_claims',
+                message: "Have you filed any home insurance claims in the past 5 years?",
+                type: 'options',
+                options: [
+                    {
+                        text: "No claims",
+                        value: 'none',
+                        icon: '✅',
+                        desc: 'Clean insurance history'
+                    },
+                    {
+                        text: "1-2 small claims",
+                        value: 'few',
+                        icon: '📋',
+                        desc: 'Minor claims under $5,000'
+                    },
+                    {
+                        text: "Multiple or large claims",
+                        value: 'many',
+                        icon: '📄',
+                        desc: 'Several claims or major damage'
+                    }
+                ],
+                field: 'claims_history'
+            },
+            
+            // Step 23: Coverage Preference
             {
                 id: 'coverage_preference',
-                message: "Almost there! What level of protection are you looking for?",
+                message: "What level of protection are you looking for?",
                 type: 'options',
                 options: [
                     {
@@ -857,50 +1144,56 @@
                         text: "Comprehensive Coverage",
                         value: 'standard',
                         icon: '🏠',
-                        desc: 'Full protection + natural disasters'
+                        desc: 'Full protection + weather events'
                     },
                     {
                         text: "Premium Coverage",
                         value: 'premium',
                         icon: '💎',
-                        desc: 'Maximum protection + valuables'
+                        desc: 'Maximum protection + high-value items'
                     }
                 ],
-                field: 'coverage_type'
+                field: 'coverage_preference'
             },
             
-            // Step 9: Previous claims
+            // Step 24: Deductible Preference
             {
-                id: 'previous_claims',
-                message: "Last question! Have you filed any home insurance claims in the past 5 years?",
+                id: 'deductible_preference',
+                message: "What deductible amount would you prefer? (Higher deductible = lower premium)",
                 type: 'options',
                 options: [
                     {
-                        text: "No claims",
-                        value: 'no',
-                        icon: '✅',
-                        desc: 'Clean insurance history'
+                        text: "$500 Deductible",
+                        value: '500',
+                        icon: '💰',
+                        desc: 'Lower deductible, higher premium'
                     },
                     {
-                        text: "1-2 small claims",
-                        value: 'few',
-                        icon: '📋',
-                        desc: 'Minor claims history'
+                        text: "$1,000 Deductible",
+                        value: '1000',
+                        icon: '💳',
+                        desc: 'Balanced option'
                     },
                     {
-                        text: "Multiple claims",
-                        value: 'many',
-                        icon: '📑',
-                        desc: 'Several claims filed'
+                        text: "$2,500 Deductible",
+                        value: '2500',
+                        icon: '💎',
+                        desc: 'Higher deductible, lower premium'
+                    },
+                    {
+                        text: "$5,000 Deductible",
+                        value: '5000',
+                        icon: '🏦',
+                        desc: 'Highest deductible, lowest premium'
                     }
                 ],
-                field: 'claims_history'
+                field: 'deductible'
             },
             
-            // Step 10: Generate quote
+            // Step 25: Generate quote
             {
                 id: 'generate_quote',
-                message: "Alhamdulillah! I have everything I need to calculate your Shariah-compliant home insurance quote.\n\nLet me work on this for you...",
+                message: "Alhamdulillah! I have everything I need to calculate your personalized Shariah-compliant home insurance quote.\n\nLet me work on this for you...",
                 type: 'loading'
             }
         ];
@@ -1140,43 +1433,56 @@
                             <h3 style="color: var(--deep-blue); font-family: 'Amiri', serif; margin-bottom: 1rem;">
                                 Your Shariah-Compliant Quote is Ready! 🎉
                             </h3>
-                            <div style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, var(--primary-gold), var(--emerald)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 1rem 0;">
-                                ${quote.monthly}
+                            <div style="font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--primary-gold), var(--emerald)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 1rem 0;">
+                                ${quote.monthly}/month
                             </div>
-                            <div style="color: var(--text-light); margin-bottom: 2rem;">per month</div>
+                            <div style="color: var(--text-light); margin-bottom: 2rem;">Annual Premium: ${quote.annual}</div>
                             
                             <div style="background: var(--cream); border-radius: 15px; padding: 1.5rem; margin: 1rem 0; text-align: left;">
                                 <h4 style="color: var(--deep-blue); margin-bottom: 1rem; font-family: 'Amiri', serif;">
-                                    ☪ Your Coverage Includes:
+                                    ☪ Your Coverage Details:
                                 </h4>
-                                <ul style="list-style: none; padding: 0; margin: 0;">
-                                    <li style="padding: 0.5rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                                        <span style="color: var(--success);">✓</span> Dwelling protection up to ${quote.coverage}
+                                <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem;">
+                                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span style="color: var(--success);">✓</span> Dwelling: ${quote.dwelling_limit.toLocaleString()}
                                     </li>
-                                    <li style="padding: 0.5rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                                        <span style="color: var(--success);">✓</span> Personal property coverage
+                                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span style="color: var(--success);">✓</span> Personal Property: ${(quote.dwelling_limit * 0.75).toLocaleString()}
                                     </li>
-                                    <li style="padding: 0.5rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                                        <span style="color: var(--success);">✓</span> Liability protection
+                                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span style="color: var(--success);">✓</span> Liability: ${Math.min(quote.dwelling_limit, 500000).toLocaleString()}
                                     </li>
-                                    <li style="padding: 0.5rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                                        <span style="color: var(--success);">✓</span> 24/7 claims support
+                                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span style="color: var(--success);">✓</span> Deductible: ${userData.deductible}
                                     </li>
-                                    <li style="padding: 0.5rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                                        <span style="color: var(--success);">✓</span> Shariah-compliant investment
+                                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span style="color: var(--success);">✓</span> 24/7 Claims Support
                                     </li>
-                                    <li style="padding: 0.5rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                                        <span style="color: var(--success);">✓</span> Community profit sharing
+                                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span style="color: var(--success);">✓</span> Emergency Repairs Coverage
                                     </li>
                                 </ul>
                             </div>
                             
+                            ${quote.discounts.length > 0 ? `
+                            <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(46, 139, 87, 0.1)); border: 1px solid var(--success); border-radius: 15px; padding: 1rem; margin: 1rem 0;">
+                                <h4 style="color: var(--emerald); margin-bottom: 0.5rem; font-size: 0.95rem;">
+                                    🎉 Applied Discounts:
+                                </h4>
+                                <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem;">
+                                    ${quote.discounts.map(discount => `
+                                        <li style="padding: 0.2rem 0; color: var(--emerald);">• ${discount}</li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                            ` : ''}
+                            
                             <div style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(46, 139, 87, 0.1)); border: 1px solid var(--primary-gold); border-radius: 15px; padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--primary-gold);">
-                                <h4 style="color: var(--deep-blue); margin-bottom: 0.5rem; font-family: 'Amiri', serif;">
+                                <h4 style="color: var(--deep-blue); margin-bottom: 0.5rem; font-family: 'Amiri', serif; font-size: 0.95rem;">
                                     ☪ Islamic Assurance
                                 </h4>
-                                <p style="color: var(--text-light); font-size: 0.9rem; margin: 0; line-height: 1.5;">
-                                    This quote is 100% Shariah-compliant and has been reviewed by our Islamic Advisory Board. 
+                                <p style="color: var(--text-light); font-size: 0.8rem; margin: 0; line-height: 1.4;">
+                                    This quote is 100% Shariah-compliant, reviewed by our Islamic Advisory Board. 
                                     No riba, no gharar, no haram investments.
                                 </p>
                             </div>
@@ -1204,27 +1510,27 @@
             
             const finalOptions = [
                 {
-                    text: "Get This Coverage",
+                    text: "Purchase This Policy",
                     icon: '✅',
-                    desc: 'Proceed with this quote',
+                    desc: 'Proceed with this coverage',
                     action: 'proceed'
                 },
                 {
                     text: "Customize Coverage",
                     icon: '⚙️',
-                    desc: 'Adjust coverage options',
+                    desc: 'Adjust limits and options',
                     action: 'customize'
                 },
                 {
                     text: "Speak with Agent",
                     icon: '📞',
-                    desc: 'Talk to a human specialist',
+                    desc: 'Talk to a specialist',
                     action: 'agent'
                 },
                 {
-                    text: "Email Quote",
+                    text: "Email Quote Details",
                     icon: '📧',
-                    desc: 'Send details to my email',
+                    desc: 'Send complete quote to email',
                     action: 'email'
                 }
             ];
@@ -1249,68 +1555,138 @@
         }
 
         function calculateQuote(data) {
-            let basePrice = 85;
+            // Base premium calculation
+            let basePremium = 800; // Annual base premium
             
-            // Home type adjustments
-            const homeTypeMultipliers = {
-                'house': 1.0,
-                'apartment': 0.7,
-                'townhouse': 0.85,
+            // Property type adjustments
+            const propertyMultipliers = {
+                'single_family': 1.0,
+                'apartment': 0.6,
+                'townhouse': 0.8,
+                'duplex': 1.2
+            };
+            
+            // Construction year adjustments (older = higher risk)
+            const currentYear = new Date().getFullYear();
+            const houseAge = currentYear - parseInt(data.construction_year || currentYear);
+            let ageMultiplier = 1.0;
+            if (houseAge > 50) ageMultiplier = 1.4;
+            else if (houseAge > 30) ageMultiplier = 1.2;
+            else if (houseAge > 15) ageMultiplier = 1.1;
+            else if (houseAge > 5) ageMultiplier = 1.0;
+            else ageMultiplier = 0.95; // New construction discount
+            
+            // Home value adjustments - coverage limit
+            const homeValue = parseInt(data.home_value || 300000);
+            const dwellingLimit = Math.min(homeValue * 1.2, homeValue + 100000); // 120% of value or +100k, whichever is less
+            
+            // Calculate premium based on coverage amount
+            const coverageMultiplier = dwellingLimit / 300000; // Base coverage is 300k
+            
+            // Construction material adjustments
+            const materialMultipliers = {
+                'frame': 1.0,
+                'masonry': 0.85, // Fire resistant
+                'steel': 0.9,
+                'mixed': 1.05
+            };
+            
+            // Roof type adjustments
+            const roofMultipliers = {
+                'composition_shingle': 1.0,
+                'tile': 0.9, // More durable
+                'metal': 0.85, // Fire/wind resistant
+                'slate': 0.8, // Most durable
                 'other': 1.1
             };
             
-            // Home value adjustments
-            const valueMultipliers = {
-                '0-200k': 0.8,
-                '200k-400k': 1.0,
-                '400k-600k': 1.3,
-                '600k-1m': 1.6,
-                '1m+': 2.0
+            // Foundation adjustments
+            const foundationMultipliers = {
+                'slab': 1.0,
+                'crawl_space': 1.05,
+                'basement': 1.1, // Water damage risk
+                'pier_post': 1.15 // Flood risk
             };
             
-            // Home age adjustments
-            const ageMultipliers = {
-                '2020+': 0.85,
-                '2010-2019': 0.9,
-                '2000-2009': 1.0,
-                '1990-1999': 1.1,
-                'pre-1990': 1.25
+            // Square footage adjustment (larger = more to insure)
+            const sqft = parseInt(data.square_footage || 2000);
+            const sqftMultiplier = Math.min(Math.max(sqft / 2000, 0.7), 2.0); // Between 70% and 200%
+            
+            // Safety features discounts
+            const discounts = [];
+            let safetyMultiplier = 1.0;
+            
+            if (data.smoke_detectors && data.smoke_detectors !== 'none') {
+                safetyMultiplier *= 0.95;
+                discounts.push('Smoke Detector Discount (5%)');
+            }
+            
+            if (data.security_system === 'monitored') {
+                safetyMultiplier *= 0.9;
+                discounts.push('Monitored Security System Discount (10%)');
+            } else if (data.security_system === 'self_monitored') {
+                safetyMultiplier *= 0.95;
+                discounts.push('Security System Discount (5%)');
+            }
+            
+            // Claims history adjustment
+            const claimsMultipliers = {
+                'none': 0.9, // No claims discount
+                'few': 1.0,
+                'many': 1.3
             };
             
-            // Coverage type adjustments
+            if (data.claims_history === 'none') {
+                discounts.push('Claims-Free Discount (10%)');
+            }
+            
+            // Coverage preference adjustments
             const coverageMultipliers = {
                 'basic': 0.8,
                 'standard': 1.0,
                 'premium': 1.4
             };
             
-            // Claims history adjustments
-            const claimsMultipliers = {
-                'no': 0.9,
-                'few': 1.0,
-                'many': 1.3
+            // Pool surcharge
+            let poolSurcharge = 0;
+            if (data.pool === 'inground') {
+                poolSurcharge = 150; // Annual surcharge
+            } else if (data.pool === 'aboveground') {
+                poolSurcharge = 75;
+            }
+            
+            // Deductible adjustment (higher deductible = lower premium)
+            const deductibleMultipliers = {
+                '500': 1.15,
+                '1000': 1.0,
+                '2500': 0.85,
+                '5000': 0.7
             };
             
-            const finalPrice = Math.round(basePrice * 
-                (homeTypeMultipliers[data.home_type] || 1.0) *
-                (valueMultipliers[data.home_value] || 1.0) *
-                (ageMultipliers[data.home_age] || 1.0) *
-                (coverageMultipliers[data.coverage_type] || 1.0) *
-                (claimsMultipliers[data.claims_history] || 1.0)
+            // Calculate final premium
+            const annualPremium = Math.round(
+                (basePremium * 
+                (propertyMultipliers[data.property_type] || 1.0) *
+                ageMultiplier *
+                coverageMultiplier *
+                (materialMultipliers[data.construction_material] || 1.0) *
+                (roofMultipliers[data.roof_type] || 1.0) *
+                (foundationMultipliers[data.foundation_type] || 1.0) *
+                sqftMultiplier *
+                safetyMultiplier *
+                (claimsMultipliers[data.claims_history] || 1.0) *
+                (coverageMultipliers[data.coverage_preference] || 1.0) *
+                (deductibleMultipliers[data.deductible] || 1.0)) + 
+                poolSurcharge
             );
             
-            // Determine coverage amount
-            const coverageAmounts = {
-                '0-200k': '200,000',
-                '200k-400k': '400,000',
-                '400k-600k': '600,000',
-                '600k-1m': '800,000',
-                '1m+': '1,200,000'
-            };
+            const monthlyPremium = Math.round(annualPremium / 12);
             
             return {
-                monthly: finalPrice,
-                coverage: coverageAmounts[data.home_value] || '400,000'
+                monthly: monthlyPremium,
+                annual: annualPremium,
+                dwelling_limit: dwellingLimit,
+                discounts: discounts
             };
         }
 
@@ -1323,8 +1699,11 @@
                     setTimeout(() => {
                         hideTypingIndicator();
                         addAgentMessage({
-                            message: "Excellent choice! 🎉\n\nI'm connecting you with our Islamic insurance specialist to finalize your policy. They'll contact you within 30 minutes to complete the process.\n\nBarakallahu feeki for choosing Takaful! Your home will be protected according to Islamic principles.",
+                            message: "Excellent choice! 🎉\n\nI'm connecting you with our underwriting team to finalize your Shariah-compliant policy. You'll receive:\n\n• Policy documents within 24 hours\n• Payment setup instructions\n• Your Islamic compliance certificate\n• Direct contact for your account manager\n\nBarakallahu feeki for choosing Takaful! Your home will be protected according to Islamic principles.",
                         });
+                        
+                        // Here you would typically send the data to your backend
+                        console.log('Quote data to be submitted:', userData);
                     }, 1500);
                     break;
                     
@@ -1333,7 +1712,7 @@
                     setTimeout(() => {
                         hideTypingIndicator();
                         addAgentMessage({
-                            message: "Of course! Let me connect you with our coverage specialist who can help you customize your policy to perfectly fit your needs and budget.\n\nThey'll call you within 15 minutes to discuss your options.",
+                            message: "Perfect! Our coverage specialist will help you customize your policy to fit your exact needs and budget.\n\nThey'll contact you within 15 minutes to discuss:\n• Adjusting coverage limits\n• Adding optional coverages\n• Optimizing your deductible\n• Special endorsements\n\nYour quote reference number is: TKF-" + Date.now().toString().slice(-6),
                         });
                     }, 1500);
                     break;
@@ -1343,7 +1722,7 @@
                     setTimeout(() => {
                         hideTypingIndicator();
                         addAgentMessage({
-                            message: "Perfect! I'm scheduling a call with one of our Takaful specialists right now.\n\nExpect a call from us within the next 10 minutes. Our specialist will have all your information ready and can answer any questions about Islamic insurance principles.\n\nJazakallahu khairan!",
+                            message: "Wonderful! I'm scheduling a call with one of our licensed Takaful specialists right now.\n\nExpected call time: Within 10 minutes\nSpecialist: Will have your complete quote ready\nTopics: Coverage details, Islamic compliance, next steps\n\nThey'll answer any questions about our Shariah-compliant approach and help you move forward.\n\nJazakallahu khairan for your patience!",
                         });
                     }, 1500);
                     break;
@@ -1353,41 +1732,164 @@
                     setTimeout(() => {
                         hideTypingIndicator();
                         addAgentMessage({
-                            message: `Great! I've sent your complete Shariah-compliant quote to ${userData.email}.\n\nYou'll receive:\n• Your personalized quote details\n• Coverage breakdown\n• Islamic compliance certificate\n• Next steps to activate your policy\n\nThe email should arrive within the next few minutes. Check your spam folder just in case!\n\nAlhamdulillah, it was wonderful helping you today!`,
+                            message: `Sending complete quote details to ${userData.email} now...\n\nYour email will include:\n📧 Detailed coverage breakdown\n📊 Premium calculation\n📜 Islamic compliance certificate\n📋 Policy application\n📞 Direct contact information\n🔒 Secure payment portal link\n\nExpected delivery: 2-3 minutes\nQuote reference: TKF-${Date.now().toString().slice(-6)}\n\nAlhamdulillah! Thank you for choosing Takaful for your home protection needs.`,
                         });
+                        
+                        // Here you would send the quote data to your email service
+                        console.log('Email quote data:', userData);
                     }, 1500);
                     break;
             }
         }
 
         function updateProgress() {
-            const totalSteps = conversationFlow.length;
             const progressTexts = [
-                'Getting Started',
-                'Account Verification',
-                'Personal Info',
-                'Contact Details', 
-                'Home Location',
-                'Property Details',
-                'Home Age',
-                'Property Value',
-                'Coverage Selection',
-                'Claims History',
-                'Calculating Quote'
+                'Getting Started',           // 0
+                'Account Check',             // 1
+                'Personal Info',             // 2
+                'Contact Details',           // 3
+                'Phone Number',              // 4
+                'Home Address',              // 5
+                'Location Details',          // 6
+                'State & ZIP',               // 7-8
+                'Property Type',             // 9
+                'Construction Details',      // 10
+                'Home Value',                // 11
+                'Square Footage',            // 12
+                'Building Materials',        // 13
+                'Roof & Foundation',         // 14-15
+                'Home Features',             // 16-19
+                'Safety Features',           // 20-21
+                'Claims History',            // 22
+                'Coverage Options',          // 23
+                'Deductible',                // 24
+                'Calculating Quote'          // 25
             ];
             
-            const progressText = progressTexts[conversationStep] || 'Almost Done';
-            document.getElementById('progressText').textContent = progressText;
+            const currentProgress = Math.min(conversationStep, progressTexts.length - 1);
+            document.getElementById('progressText').textContent = progressTexts[currentProgress];
         }
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Add some initial floating elements for ambiance
-            setTimeout(() => {
-                const greetings = ['Assalamu Alaikum', 'Marhaba', 'Ahlan wa Sahlan'];
-                console.log(greetings[Math.floor(Math.random() * greetings.length)] + '! Welcome to Takaful.');
-            }, 1000);
+            // Initialize any necessary data
+            console.log('Takaful Quote System Initialized');
+            
+            // Set up global error handling
+            window.addEventListener('error', function(e) {
+                console.error('Application error:', e);
+            });
         });
+
+        // Utility function to format user input for display
+        function formatUserInput(value, field) {
+            switch(field) {
+                case 'phone_number':
+                    // Format phone number for display
+                    const cleaned = value.replace(/\D/g, '');
+                    if (cleaned.length === 10) {
+                        return `(${cleaned.slice(0,3)}) ${cleaned.slice(3,6)}-${cleaned.slice(6)}`;
+                    }
+                    return value;
+                
+                case 'zip_code':
+                    // Ensure ZIP code formatting
+                    return value.trim().toUpperCase();
+                
+                case 'state':
+                    // Uppercase state abbreviation
+                    return value.trim().toUpperCase();
+                
+                case 'home_value':
+                case 'square_footage':
+                case 'construction_year':
+                case 'bedrooms':
+                case 'bathrooms':
+                    // Format numbers with proper separators
+                    return parseInt(value).toLocaleString();
+                
+                default:
+                    return value;
+            }
+        }
+
+        // Function to validate ZIP code more thoroughly
+        function validateZipCode(zip) {
+            const cleaned = zip.trim().replace(/\s+/g, '');
+            // Standard 5-digit ZIP or ZIP+4
+            return /^\d{5}(-\d{4})?$/.test(cleaned);
+        }
+
+        // Function to validate phone number
+        function validatePhoneNumber(phone) {
+            const cleaned = phone.replace(/\D/g, '');
+            return cleaned.length >= 10 && cleaned.length <= 11;
+        }
+
+        // Enhanced user input formatting in sendMessage function
+        function sendMessage() {
+            const step = conversationFlow[conversationStep];
+            const userInput = document.getElementById('userInput');
+            let value = userInput.value.trim();
+            
+            if (!value) return;
+            
+            // Apply specific formatting based on field type
+            if (step.field === 'phone_number') {
+                value = value.replace(/\D/g, ''); // Remove non-digits for storage
+            }
+            
+            // Validate input
+            if (step.validation && !step.validation(userInput.value.trim())) {
+                userInput.style.borderColor = 'var(--error)';
+                
+                // Show specific error message
+                let errorMessage = 'Please check your input';
+                switch(step.field) {
+                    case 'email':
+                        errorMessage = 'Please enter a valid email address';
+                        break;
+                    case 'phone_number':
+                        errorMessage = 'Please enter a valid phone number';
+                        break;
+                    case 'zip_code':
+                        errorMessage = 'Please enter a valid ZIP code (12345 or 12345-6789)';
+                        break;
+                    case 'construction_year':
+                        errorMessage = 'Please enter a valid year between 1800 and current year';
+                        break;
+                    case 'home_value':
+                        errorMessage = 'Please enter a value of at least $50,000';
+                        break;
+                    case 'square_footage':
+                        errorMessage = 'Please enter at least 400 square feet';
+                        break;
+                }
+                
+                // Could show error message in UI here
+                setTimeout(() => {
+                    userInput.style.borderColor = '';
+                }, 2000);
+                return;
+            }
+            
+            // Format value for display
+            const displayValue = formatUserInput(userInput.value.trim(), step.field);
+            
+            // Add user message with formatted display
+            addUserMessage(displayValue);
+            
+            // Store actual value (may be different from display)
+            userData[step.field] = value;
+            
+            // Hide input and proceed
+            hideAllInputs();
+            conversationStep++;
+            
+            setTimeout(() => {
+                showNextStep();
+            }, 1000);
+        }
     </script>
 </body>
 </html>
