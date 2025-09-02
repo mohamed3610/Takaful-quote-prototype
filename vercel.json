@@ -4,10 +4,9 @@
   "installCommand": null,
   "framework": null,
   "functions": {},
+
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
+    { "src": "/(.*)", "dest": "index.html" }
   ]
+
 }
