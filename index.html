@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Your Takaful Quote - Shariah-Compliant Home Insurance</title>
+    <title>Takaful - Shariah-Compliant Home Insurance</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
         
@@ -21,9 +21,6 @@
             --text-light: #6B7280;
             --shadow: rgba(0, 0, 0, 0.1);
             --shadow-dark: rgba(0, 0, 0, 0.25);
-            --success: #10B981;
-            --warning: #F59E0B;
-            --error: #EF4444;
         }
 
         * {
@@ -36,87 +33,318 @@
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
-            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--navy) 100%);
-            min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Islamic Patterns */
-        .islamic-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* Advanced Islamic Patterns */
+        .islamic-pattern-1 {
+            position: absolute;
             width: 100%;
             height: 100%;
             opacity: 0.03;
-            background: 
-                radial-gradient(circle at 25% 25%, var(--primary-gold) 1px, transparent 1px),
-                radial-gradient(circle at 75% 75%, var(--emerald) 1px, transparent 1px);
+            background-image: 
+                conic-gradient(from 0deg at 50% 50%, var(--primary-gold) 0deg, transparent 60deg, var(--primary-gold) 120deg, transparent 180deg, var(--primary-gold) 240deg, transparent 300deg, var(--primary-gold) 360deg);
             background-size: 60px 60px;
-            background-position: 0 0, 30px 30px;
             pointer-events: none;
-            z-index: 1;
-            animation: patternFloat 20s ease-in-out infinite;
+            animation: rotatePattern 30s linear infinite;
         }
 
-        /* Header */
-        .header {
-            padding: 2rem 0;
-            text-align: center;
-            position: relative;
-            z-index: 10;
+        .islamic-pattern-2 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.02;
+            background: 
+                radial-gradient(circle at 0% 0%, var(--emerald) 1px, transparent 1px),
+                radial-gradient(circle at 25% 25%, var(--primary-gold) 0.5px, transparent 0.5px),
+                radial-gradient(circle at 50% 50%, var(--mint) 1px, transparent 1px),
+                radial-gradient(circle at 75% 75%, var(--primary-gold) 0.5px, transparent 0.5px),
+                radial-gradient(circle at 100% 100%, var(--emerald) 1px, transparent 1px);
+            background-size: 80px 80px, 40px 40px, 60px 60px, 30px 30px, 90px 90px;
+            background-position: 0 0, 15px 15px, 30px 30px, 45px 45px, 60px 60px;
+            pointer-events: none;
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .floating-element:nth-child(1) { 
+            top: 10%; 
+            left: 10%; 
+            animation-delay: 0s; 
+            font-size: 2rem;
+        }
+        .floating-element:nth-child(2) { 
+            top: 70%; 
+            right: 20%; 
+            animation-delay: 2s; 
+            font-size: 1.5rem;
+        }
+        .floating-element:nth-child(3) { 
+            top: 30%; 
+            right: 10%; 
+            animation-delay: 4s; 
+            font-size: 2.5rem;
+        }
+
+        /* Enhanced Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(25px) saturate(180%);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        header.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
         }
 
         .logo {
             font-family: 'Amiri', serif;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            color: var(--primary-gold);
+            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-decoration: none;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             gap: 0.5rem;
-            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .logo::before {
             content: '☪';
-            font-size: 2rem;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             animation: pulse 2s ease-in-out infinite;
         }
 
-        .header-subtitle {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1rem;
-            font-weight: 300;
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            margin: 0;
         }
 
-        /* Main Container */
-        .quote-container {
-            max-width: 600px;
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--emerald));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--navy) 50%, #2c5aa0 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="islamic-hero" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M20 5 L35 20 L20 35 L5 20 Z M20 15 L25 20 L20 25 L15 20 Z" fill="%23D4AF37" opacity="0.08"/><circle cx="20" cy="20" r="2" fill="%232E8B57" opacity="0.05"/></pattern></defs><rect width="200" height="200" fill="url(%23islamic-hero)"/></svg>') center/cover;
+            pointer-events: none;
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        .hero-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: floatParticle 8s linear infinite;
+        }
+
+        .hero-content {
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            z-index: 2;
             position: relative;
-            z-index: 10;
         }
 
-        /* Conversation Card */
-        .conversation-card {
-            background: white;
-            border-radius: 25px;
-            padding: 0;
+        .hero-text h1 {
+            font-family: 'Amiri', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-text .highlight {
+            background: linear-gradient(135deg, var(--primary-gold), var(--light-gold));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1.5rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
+            color: white;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .cta-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--primary-gold);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInRight 1s ease 0.6s both;
+            position: relative;
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
             box-shadow: 
                 0 25px 60px rgba(0, 0, 0, 0.2),
                 0 0 0 1px rgba(255, 255, 255, 0.1);
+            transform: rotate(-5deg);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            min-height: 700px;
-            max-height: 90vh;
-            display: flex;
-            flex-direction: column;
         }
 
-        .conversation-card::before {
+        .hero-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -126,368 +354,514 @@
             background: linear-gradient(90deg, var(--primary-gold), var(--emerald), var(--mint));
         }
 
-        /* Chat Header */
-        .chat-header {
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: var(--cream);
+        .hero-card:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 
+                0 35px 80px rgba(0, 0, 0, 0.25),
+                0 0 0 1px rgba(212, 175, 55, 0.2);
         }
 
-        .agent-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .agent-info h3 {
-            font-family: 'Amiri', serif;
-            color: var(--deep-blue);
-            margin-bottom: 0.25rem;
-            font-size: 1.1rem;
-        }
-
-        .agent-info p {
-            color: var(--text-light);
-            font-size: 0.85rem;
-        }
-
-        .typing-indicator {
-            display: none;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--emerald);
-            font-size: 0.85rem;
-        }
-
-        .typing-dots {
-            display: flex;
-            gap: 0.2rem;
-        }
-
-        .typing-dots span {
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: var(--emerald);
-            animation: typingDot 1.4s infinite;
-        }
-
-        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-        /* Chat Messages */
-        .chat-messages {
-            flex: 1;
-            padding: 2rem;
-            overflow-y: auto;
-            max-height: 400px;
-            scroll-behavior: smooth;
-            transition: max-height 0.3s ease;
-        }
-
-        /* Reduce chat messages height when options are active */
-        .chat-messages.with-options {
-            max-height: 250px;
-        }
-
-        .message {
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: messageSlideIn 0.5s ease forwards;
-        }
-
-        .message.agent {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .message.user {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .message-avatar {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            color: white;
-            flex-shrink: 0;
-        }
-
-        .message-content {
-            background: var(--cream);
-            padding: 1rem 1.5rem;
-            border-radius: 20px;
-            border-bottom-left-radius: 5px;
-            max-width: 80%;
-            line-height: 1.6;
-        }
-
-        .message.user .message-content {
-            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
-            color: white;
-            border-radius: 20px;
-            border-bottom-right-radius: 5px;
-            border-bottom-left-radius: 20px;
-        }
-
-        /* Input Area */
-        .chat-input {
-            padding: 1.5rem 2rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            background: white;
-        }
-
-        .input-container {
-            display: none;
-            gap: 1rem;
-            align-items: flex-end;
-        }
-
-        .input-container.active {
-            display: flex;
-        }
-
-        .form-input {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            border: 2px solid #E5E7EB;
-            border-radius: 25px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: white;
-            font-family: 'Poppins', sans-serif;
-            resize: none;
-            min-height: 50px;
-            max-height: 120px;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary-gold);
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-        }
-
-        .send-button {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .send-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
-        }
-
-        .send-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Option Buttons */
-        .options-container {
-            display: none;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-top: 1rem;
-            max-height: 300px;
-            overflow-y: auto;
-            padding-right: 0.5rem;
-        }
-
-        .options-container.active {
-            display: flex;
-        }
-
-        /* Scrollbar styling for options */
-        .options-container::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .options-container::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.05);
-            border-radius: 3px;
-        }
-
-        .options-container::-webkit-scrollbar-thumb {
-            background: var(--primary-gold);
-            border-radius: 3px;
-            opacity: 0.7;
-        }
-
-        .options-container::-webkit-scrollbar-thumb:hover {
-            background: var(--dark-gold);
-        }
-
-        .option-button {
-            background: var(--cream);
-            border: 2px solid transparent;
-            border-radius: 20px;
-            padding: 1rem 1.5rem;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .option-button:hover {
-            transform: translateX(5px);
-            border-color: var(--primary-gold);
-            background: rgba(212, 175, 55, 0.05);
-        }
-
-        .option-icon {
-            font-size: 1.5rem;
-            width: 35px;
+        .house-visual {
             text-align: center;
         }
 
-        .option-text {
-            flex: 1;
-        }
-
-        .option-title {
-            font-weight: 600;
-            color: var(--deep-blue);
-            margin-bottom: 0.25rem;
-        }
-
-        .option-desc {
-            color: var(--text-light);
-            font-size: 0.85rem;
-            line-height: 1.4;
-        }
-
-        /* Progress Indicator */
-        .progress-indicator {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        /* Welcome Screen */
-        .welcome-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 3rem 2rem;
-            height: 500px;
-        }
-
-        .welcome-icon {
-            font-size: 4rem;
-            margin-bottom: 2rem;
+        .house-icon {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+            display: block;
             background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .welcome-title {
+        .hero-card h3 {
             font-family: 'Amiri', serif;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--deep-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        /* Enhanced Features Section */
+        .features {
+            padding: 8rem 0;
+            background: var(--cream);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .section-header h2 {
+            font-family: 'Amiri', serif;
+            font-size: 3rem;
+            color: var(--deep-blue);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--emerald));
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .features-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 3.5rem 2.5rem;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--emerald));
+            transition: left 0.5s ease;
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .feature-card:hover::before {
+            left: 0;
+        }
+
+        .feature-card:hover::after {
+            opacity: 0.03;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            margin: 0 auto 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: iconRotate 3s linear infinite;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            color: var(--deep-blue);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-family: 'Amiri', serif;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--deep-blue);
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.05), transparent);
+        }
+
+        .stats-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-gold), var(--light-gold));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
             margin-bottom: 1rem;
         }
 
-        .welcome-subtitle {
-            color: var(--text-light);
+        .stat-label {
             font-size: 1.1rem;
-            margin-bottom: 3rem;
-            line-height: 1.6;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
         }
 
-        .start-button {
-            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
-            color: white;
-            border: none;
-            padding: 1rem 2.5rem;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            font-family: 'Poppins', sans-serif;
+        /* Enhanced Why Choose Section */
+        .why-choose {
+            padding: 8rem 0;
+            background: white;
+            position: relative;
         }
 
-        .start-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
-        }
-
-        /* Loading Animation */
-        .loading {
-            display: none;
-            justify-content: center;
+        .why-choose-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
             align-items: center;
-            padding: 2rem;
         }
 
-        .loading.active {
+        .benefits-content h2 {
+            font-family: 'Amiri', serif;
+            font-size: 3rem;
+            color: var(--deep-blue);
+            margin-bottom: 2rem;
+        }
+
+        .benefits-content p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .benefits-list {
+            list-style: none;
+        }
+
+        .benefits-list li {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
         }
 
-        .spinner {
+        .benefits-list li:hover {
+            transform: translateX(10px);
+            color: var(--primary-gold);
+        }
+
+        .benefits-list li::before {
+            content: '✓';
             width: 40px;
             height: 40px;
-            border: 3px solid rgba(212, 175, 55, 0.2);
-            border-top: 3px solid var(--primary-gold);
+            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            flex-shrink: 0;
+            font-size: 1.2rem;
         }
 
-        /* Animations */
-        @keyframes messageSlideIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .islamic-values {
+            text-align: center;
         }
 
-        @keyframes typingDot {
-            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-            30% { transform: translateY(-10px); opacity: 1; }
+        .islamic-values h2 {
+            font-family: 'Amiri', serif;
+            font-size: 2.5rem;
+            color: var(--deep-blue);
+            margin-bottom: 2rem;
+        }
+
+        .value-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background: linear-gradient(135deg, var(--cream), white);
+            padding: 2.5rem 1.5rem;
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--emerald));
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .value-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .value-card h4 {
+            color: var(--deep-blue);
+            margin-bottom: 1rem;
+            font-family: 'Amiri', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .value-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: var(--pearl);
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .testimonials-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .testimonials h2 {
+            font-family: 'Amiri', serif;
+            font-size: 3rem;
+            color: var(--deep-blue);
+            margin-bottom: 4rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 3rem 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+            margin: 2rem;
+            position: relative;
+            border-left: 5px solid var(--primary-gold);
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            color: var(--primary-gold);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Enhanced Final CTA */
+        .final-cta {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, var(--deep-blue), var(--navy), var(--emerald));
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 25 L75 50 L50 75 L25 50 Z" fill="%23D4AF37" opacity="0.03"/></svg>') center/100px 100px;
+            animation: patternMove 15s linear infinite;
+        }
+
+        .final-cta h2 {
+            font-family: 'Amiri', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .final-cta p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-white {
+            background: white;
+            color: var(--deep-blue);
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Enhanced Footer */
+        footer {
+            background: var(--deep-blue);
+            color: white;
+            padding: 6rem 0 2rem;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 4rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Amiri', serif;
+            color: var(--primary-gold);
+            margin-bottom: 2rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 2.2;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-gold);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Advanced Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
         @keyframes pulse {
@@ -495,1401 +869,461 @@
             50% { opacity: 0.7; }
         }
 
-        @keyframes spin {
+        @keyframes shimmer {
+            0%, 100% { background-position: -200% center; }
+            50% { background-position: 200% center; }
+        }
+
+        @keyframes rotatePattern {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        @keyframes patternFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        @keyframes backgroundShift {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-10px) translateY(-10px); }
+            50% { transform: translateX(10px) translateY(10px); }
+            75% { transform: translateX(-5px) translateY(15px); }
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.1; }
+            90% { opacity: 0.1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes iconRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes patternMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
         }
 
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-content { gap: 4rem; }
+            .why-choose-content { gap: 4rem; }
+        }
+
         @media (max-width: 768px) {
-            .quote-container {
-                padding: 0 1rem;
+            .nav-links { display: none; }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
             }
             
-            .chat-messages {
-                padding: 1.5rem 1rem;
-            }
+            .hero-text h1 { font-size: 2.8rem; }
+            .hero-ctas { justify-content: center; }
             
-            .chat-input {
-                padding: 1rem;
-            }
+            .features-grid { grid-template-columns: 1fr; }
+            .why-choose-content { grid-template-columns: 1fr; }
+            .value-cards { grid-template-columns: 1fr; }
+            .stats-container { grid-template-columns: repeat(2, 1fr); }
             
-            .welcome-screen {
-                padding: 2rem 1rem;
-            }
+            .final-cta h2 { font-size: 2.5rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
             
-            .welcome-title {
-                font-size: 1.7rem;
-            }
-            
-            .message-content {
-                max-width: 90%;
-            }
+            .section-header h2 { font-size: 2.2rem; }
+            .hero-card { transform: none; margin-top: 2rem; }
         }
 
         @media (max-width: 480px) {
-            .header {
-                padding: 1rem 0;
-            }
-            
-            .logo {
-                font-size: 2rem;
-            }
-            
-            .conversation-card {
-                border-radius: 15px;
-                margin: 0;
-            }
+            .hero-text h1 { font-size: 2.2rem; }
+            .stat-number { font-size: 2.5rem; }
+            .stats-container { grid-template-columns: 1fr; }
         }
 
-        /* Hide elements initially */
-        .chat-interface {
-            display: none;
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .chat-interface.active {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
     </style>
 </head>
 <body>
-    <div class="islamic-pattern"></div>
-    
-    <div class="header">
-        <a href="#" class="logo">Takaful</a>
-        <p class="header-subtitle">Assalamu Alaikum! Let's get you protected with Shariah-compliant insurance</p>
-    </div>
+    <!-- Floating Islamic Elements -->
+    <div class="floating-element">☪</div>
+    <div class="floating-element">🕌</div>
+    <div class="floating-element">✨</div>
 
-    <div class="quote-container">
-        <div class="conversation-card">
-            <div class="progress-indicator">
-                <span id="progressText">Getting Started</span>
-            </div>
+    <header id="header">
+        <nav>
+            <a href="#" class="logo">Takaful</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#why-choose">Why Choose Us</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#quote" class="cta-button">Get Quote</a>
+        </nav>
+    </header>
 
-            <!-- Welcome Screen -->
-            <div class="welcome-screen" id="welcomeScreen">
-                <div class="welcome-icon">🏡</div>
-                <h2 class="welcome-title">Welcome to Takaful Home Insurance</h2>
-                <p class="welcome-subtitle">
-                    Get a personalized, Shariah-compliant home insurance quote in just a few minutes. 
-                    Our AI assistant will guide you through each step.
-                </p>
-                <button class="start-button" onclick="startConversation()">
-                    Start My Quote Journey →
-                </button>
-            </div>
-
-            <!-- Chat Interface -->
-            <div class="chat-interface" id="chatInterface">
-                <!-- Chat Header -->
-                <div class="chat-header">
-                    <div class="agent-avatar">🤖</div>
-                    <div class="agent-info">
-                        <h3>Aisha - Takaful Assistant</h3>
-                        <p>Shariah-Compliant Insurance Specialist</p>
-                    </div>
-                    <div class="typing-indicator" id="typingIndicator">
-                        <div class="typing-dots">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        Aisha is typing...
-                    </div>
+    <section class="hero" id="home">
+        <div class="islamic-pattern-1"></div>
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Protect Your Home with <span class="highlight">Shariah-Compliant</span> Insurance</h1>
+                <p>Experience ultimate peace of mind with our premium halal home insurance solutions. Built on authentic Islamic principles of mutual cooperation, transparency, and shared responsibility for the modern Muslim family.</p>
+                <div class="hero-ctas">
+                    <a href="#quote" class="cta-button cta-primary">Get Instant Quote</a>
+                    <a href="#features" class="cta-button cta-secondary">Discover Benefits</a>
                 </div>
-
-                <!-- Chat Messages -->
-                <div class="chat-messages" id="chatMessages">
-                    <!-- Messages will be dynamically added here -->
-                </div>
-
-                <!-- Chat Input -->
-                <div class="chat-input">
-                    <!-- Text Input -->
-                    <div class="input-container" id="textInput">
-                        <input type="text" class="form-input" id="userInput" placeholder="Type your answer..." />
-                        <button class="send-button" onclick="sendMessage()" id="sendBtn">
-                            ➤
-                        </button>
-                    </div>
-
-                    <!-- Options -->
-                    <div class="options-container" id="optionsContainer">
-                        <!-- Options will be dynamically added here -->
-                    </div>
-
-                    <!-- Loading -->
-                    <div class="loading" id="loadingIndicator">
-                        <div class="spinner"></div>
-                        <span>Processing...</span>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="house-visual">
+                        <span class="house-icon">🏡</span>
+                        <h3>Your Home, Protected</h3>
+                        <p>Comprehensive coverage that aligns with your Islamic values</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Footer Credit -->
-    <div style="text-align: center; padding: 2rem 0; color: rgba(255, 255, 255, 0.5);">
-        <p style="font-size: 0.9rem;">
-            Powered by <a href="https://dataorbitllc.com" target="_blank" style="color: var(--primary-gold); text-decoration: none; font-weight: 500;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">DataOrbit</a>
-        </p>
-    </div>
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item fade-in">
+                <span class="stat-number" data-target="50000">0</span>
+                <span class="stat-label">Families Protected</span>
+            </div>
+            <div class="stat-item fade-in">
+                <span class="stat-number" data-target="99">0</span>
+                <span class="stat-label">Claims Satisfaction %</span>
+            </div>
+            <div class="stat-item fade-in">
+                <span class="stat-number" data-target="15">0</span>
+                <span class="stat-label">Years Experience</span>
+            </div>
+            <div class="stat-item fade-in">
+                <span class="stat-number" data-target="24">0</span>
+                <span class="stat-label">Hour Support</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="islamic-pattern-2"></div>
+        <div class="section-header fade-in">
+            <h2>Why Choose Takaful Insurance?</h2>
+            <p>Our comprehensive insurance products are meticulously designed to comply with authentic Islamic law while providing world-class protection for your most valuable asset - your home.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">☪</div>
+                <h3>100% Shariah Compliant</h3>
+                <p>All our products are rigorously certified by qualified Islamic scholars and fully comply with Islamic principles of finance, ensuring complete peace of mind for practicing Muslims.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🤝</div>
+                <h3>Mutual Cooperation</h3>
+                <p>Built on the beautiful Islamic concept of Ta'awun (mutual assistance), where community members support each other during times of hardship and need.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">💎</div>
+                <h3>Transparent & Ethical</h3>
+                <p>Absolutely no hidden fees, zero interest (riba), and complete transparency in all transactions, policy terms, and investment strategies.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🛡️</div>
+                <h3>Comprehensive Protection</h3>
+                <p>Guard against fire damage, theft, natural disasters, structural issues, and other unforeseen events with our extensive coverage options.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning-Fast Claims</h3>
+                <p>Experience rapid and hassle-free claim processing with dedicated support from our team of Islamic insurance specialists and adjusters.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">📞</div>
+                <h3>Premium Support</h3>
+                <p>Access round-the-clock customer support available in multiple languages including Arabic, English, and Urdu to assist with all your insurance needs.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-choose" id="why-choose">
+        <div class="why-choose-content">
+            <div class="benefits-content slide-in-left">
+                <h2>The Takaful Advantage</h2>
+                <p>Discover what sets us apart in the world of Islamic insurance. Our commitment to authentic Islamic principles combined with modern insurance expertise creates unparalleled value.</p>
+                <ul class="benefits-list">
+                    <li>Zero interest-based transactions (Riba-free)</li>
+                    <li>Equitable profit sharing with participants</li>
+                    <li>Ethical investment of pooled funds</li>
+                    <li>Independent Shariah board oversight</li>
+                    <li>Community-centered approach to coverage</li>
+                    <li>Integrated charitable giving (Zakat) options</li>
+                    <li>Transparent fee structure and operations</li>
+                    <li>Halal investment portfolio management</li>
+                </ul>
+            </div>
+            <div class="islamic-values slide-in-right">
+                <h2>Islamic Values at Our Foundation</h2>
+                <p>Every aspect of our service is guided by authentic Islamic principles that have guided Muslims for over 1400 years.</p>
+                <div class="value-cards">
+                    <div class="value-card">
+                        <div class="icon">🕌</div>
+                        <h4>Tawhid</h4>
+                        <p>Unity of purpose in serving Allah and protecting our community</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="icon">⚖️</div>
+                        <h4>Adl</h4>
+                        <p>Justice and fairness in all our dealings and claim settlements</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="icon">🤲</div>
+                        <h4>Ta'awun</h4>
+                        <p>Mutual assistance and cooperation among community members</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="icon">💝</div>
+                        <h4>Ihsan</h4>
+                        <p>Excellence and beauty in service delivery and customer care</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="testimonials-container">
+            <h2 class="fade-in">What Our Community Says</h2>
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-text">
+                    "Finally, an insurance company that truly understands our Islamic values. When our home was damaged in a storm, Takaful handled everything with such care and speed. The entire process was transparent and completely halal. Alhamdulillah!"
+                </div>
+                <div class="testimonial-author">— Fatima Al-Zahra, Satisfied Customer</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta" id="quote">
+        <h2>Ready to Protect Your Home the Halal Way?</h2>
+        <p>Join over 50,000 Muslim families who trust Takaful for their home insurance needs. Get a personalized quote in minutes and experience insurance that aligns with your faith.</p>
+        <div class="cta-buttons">
+            <a href="#" class="cta-button cta-white">Get Your Free Quote Now</a>
+            <a href="#" class="cta-button cta-secondary">Speak with an Expert</a>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Takaful Insurance</h4>
+                <p>Leading provider of Shariah-compliant home insurance solutions, serving the Muslim community with integrity, transparency, and authentic Islamic values since 2010.</p>
+                <br>
+                <p><strong>Licensed & Regulated by:</strong><br>
+                Islamic Financial Services Board (IFSB)<br>
+                National Insurance Commission</p>
+            </div>
+            <div class="footer-section">
+                <h4>Our Services</h4>
+                <a href="#">Home Insurance Coverage</a><br>
+                <a href="#">Rapid Claims Processing</a><br>
+                <a href="#">Islamic Investment Options</a><br>
+                <a href="#">24/7 Customer Support</a><br>
+                <a href="#">Shariah Advisory Services</a><br>
+                <a href="#">Community Outreach Programs</a>
+            </div>
+            <div class="footer-section">
+                <h4>Get in Touch</h4>
+                <p>📧 salam@takaful-home.com</p>
+                <p>📞 1-800-TAKAFUL (825-2385)</p>
+                <p>💬 Live Chat Available 24/7</p>
+                <p>📍 123 Islamic Finance Boulevard<br>&nbsp;&nbsp;&nbsp;&nbsp;Suite 456, Muslim Quarter<br>&nbsp;&nbsp;&nbsp;&nbsp;Your City, State 12345</p>
+            </div>
+            <div class="footer-section">
+                <h4>Islamic Certifications</h4>
+                <p>✓ AAOIFI Standards Compliant</p>
+                <p>✓ Independent Shariah Board Certified</p>
+                <p>✓ Islamic Finance Foundation Member</p>
+                <p>✓ Halal Investment Portfolio</p>
+                <br>
+                <p><strong>Prayer Times Support:</strong><br>
+                Customer service respects Islamic prayer times</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Takaful Islamic Insurance. All rights reserved. | Protecting Muslim Families with Faith-Based Insurance Solutions | <a href="#" style="color: var(--primary-gold);">Privacy Policy</a> | <a href="#" style="color: var(--primary-gold);">Shariah Compliance</a></p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                Powered by <a href="https://dataorbitllc.com" target="_blank" style="color: var(--primary-gold); text-decoration: none; font-weight: 500; transition: all 0.3s ease;" onmouseover="this.style.opacity='1'; this.style.textDecoration='underline';" onmouseout="this.style.opacity='0.8'; this.style.textDecoration='none';">DataOrbit</a>
+            </p>
+        </div>
+    </footer>
 
     <script>
-        // Conversation flow state
-        let conversationStep = 0;
-        let userData = {};
-        let isRegisteredUser = false;
-        
-        // Updated conversation flow based on database schema
-        const conversationFlow = [
-            // Step 0: Check if user is registered
-            {
-                id: 'check_registration',
-                message: "Hi! I'm Aisha, your Takaful assistant. 😊\n\nBefore we begin, are you already a Takaful customer or do you have an account with us?",
-                type: 'options',
-                options: [
-                    {
-                        text: "Yes, I'm already a customer",
-                        value: 'existing_customer',
-                        icon: '👤',
-                        desc: 'I have a Takaful account'
-                    },
-                    {
-                        text: "No, I'm new to Takaful",
-                        value: 'new_customer',
-                        icon: '✨',
-                        desc: 'First time getting a quote'
-                    }
-                ],
-                field: 'user_type'
-            },
-            
-            // Step 1a: Existing customer login
-            {
-                id: 'existing_login',
-                message: "Perfect! Let's get you logged in quickly.\n\nWhat's the email address associated with your Takaful account?",
-                type: 'input',
-                inputType: 'email',
-                placeholder: 'your.email@example.com',
-                field: 'email',
-                validation: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-            },
-            
-            // Step 1b: New customer welcome
-            {
-                id: 'new_customer_welcome',
-                message: "Wonderful! Welcome to the Takaful family! 🌟\n\nI'm excited to help you find the perfect Shariah-compliant home insurance. This will only take a few minutes.\n\nLet's start with your name - what should I call you?",
-                type: 'input',
-                inputType: 'text',
-                placeholder: 'Enter your full name',
-                field: 'full_name',
-                validation: (value) => value.trim().length >= 2
-            },
-            
-            // Step 2: Email for new customers
-            {
-                id: 'new_customer_email',
-                message: (name) => `Nice to meet you, ${name}! 😊\n\nWhat's your email address? I'll use this to send you your quote details.`,
-                type: 'input',
-                inputType: 'email',
-                placeholder: 'your.email@example.com',
-                field: 'email',
-                validation: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-            },
-            
-            // Step 3: Phone number
-            {
-                id: 'phone_number',
-                message: "Great! Now I'll need your phone number in case we need to reach you about your coverage.",
-                type: 'input',
-                inputType: 'tel',
-                placeholder: '+1 (555) 123-4567',
-                field: 'phone_number',
-                validation: (value) => value.replace(/\D/g, '').length >= 10
-            },
-            
-            // Step 4: Home address - Street Address
-            {
-                id: 'street_address',
-                message: "Now let's talk about your home! 🏠\n\nWhat's the street address of the property you'd like to insure?",
-                type: 'input',
-                inputType: 'text',
-                placeholder: '123 Main Street',
-                field: 'street_address',
-                validation: (value) => value.trim().length >= 5
-            },
-            
-            // Step 5: City
-            {
-                id: 'city',
-                message: "What city is your home located in?",
-                type: 'input',
-                inputType: 'text',
-                placeholder: 'Enter city name',
-                field: 'city',
-                validation: (value) => value.trim().length >= 2
-            },
-            
-            // Step 6: State
-            {
-                id: 'state',
-                message: "Which state is your property in?",
-                type: 'input',
-                inputType: 'text',
-                placeholder: 'CA, NY, TX, etc.',
-                field: 'state',
-                validation: (value) => value.trim().length >= 2
-            },
-            
-            // Step 7: ZIP Code
-            {
-                id: 'zip_code',
-                message: "What's the ZIP code for your property?",
-                type: 'input',
-                inputType: 'text',
-                placeholder: '12345 or 12345-6789',
-                field: 'zip_code',
-                validation: (value) => /^\d{5}(-\d{4})?$/.test(value.trim())
-            },
-            
-            // Step 8: Property Type
-            {
-                id: 'property_type',
-                message: "Perfect! What type of property is this?",
-                type: 'options',
-                options: [
-                    {
-                        text: "Single Family Home",
-                        value: 'single_family',
-                        icon: '🏠',
-                        desc: 'Detached single-family house'
-                    },
-                    {
-                        text: "Apartment/Condo",
-                        value: 'apartment',
-                        icon: '🏢',
-                        desc: 'Unit in a building or complex'
-                    },
-                    {
-                        text: "Townhouse",
-                        value: 'townhouse',
-                        icon: '🏘️',
-                        desc: 'Attached home in a row'
-                    },
-                    {
-                        text: "Duplex",
-                        value: 'duplex',
-                        icon: '🏠',
-                        desc: 'Two-unit residential building'
-                    }
-                ],
-                field: 'property_type'
-            },
-            
-            // Step 9: Construction Year
-            {
-                id: 'construction_year',
-                message: "When was your home built? (Enter the year)",
-                type: 'input',
-                inputType: 'number',
-                placeholder: '1995',
-                field: 'construction_year',
-                validation: (value) => {
-                    const year = parseInt(value);
-                    return year >= 1800 && year <= new Date().getFullYear() + 1;
+        // Enhanced scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
-            },
-            
-            // Step 10: Home Value
-            {
-                id: 'home_value',
-                message: "What's the estimated value of your home? (Enter amount in dollars)",
-                type: 'input',
-                inputType: 'number',
-                placeholder: '350000',
-                field: 'home_value',
-                validation: (value) => parseInt(value) >= 50000
-            },
-            
-            // Step 11: Square Footage
-            {
-                id: 'square_footage',
-                message: "How many square feet is your home? (approximate is fine)",
-                type: 'input',
-                inputType: 'number',
-                placeholder: '2000',
-                field: 'square_footage',
-                validation: (value) => parseInt(value) >= 400
-            },
-            
-            // Step 12: Construction Material
-            {
-                id: 'construction_material',
-                message: "What is your home primarily made of?",
-                type: 'options',
-                options: [
-                    {
-                        text: "Frame (Wood)",
-                        value: 'frame',
-                        icon: '🌲',
-                        desc: 'Traditional wood frame construction'
-                    },
-                    {
-                        text: "Masonry (Brick/Stone)",
-                        value: 'masonry',
-                        icon: '🧱',
-                        desc: 'Brick, stone, or block construction'
-                    },
-                    {
-                        text: "Steel",
-                        value: 'steel',
-                        icon: '🏗️',
-                        desc: 'Steel frame construction'
-                    },
-                    {
-                        text: "Mixed/Other",
-                        value: 'mixed',
-                        icon: '🏠',
-                        desc: 'Combination or other materials'
-                    }
-                ],
-                field: 'construction_material'
-            },
-            
-            // Step 13: Roof Type
-            {
-                id: 'roof_type',
-                message: "What type of roof does your home have?",
-                type: 'options',
-                options: [
-                    {
-                        text: "Composition Shingle",
-                        value: 'composition_shingle',
-                        icon: '🏠',
-                        desc: 'Standard asphalt shingles'
-                    },
-                    {
-                        text: "Tile",
-                        value: 'tile',
-                        icon: '🏛️',
-                        desc: 'Clay or concrete tiles'
-                    },
-                    {
-                        text: "Metal",
-                        value: 'metal',
-                        icon: '⚡',
-                        desc: 'Metal roofing'
-                    },
-                    {
-                        text: "Slate",
-                        value: 'slate',
-                        icon: '🪨',
-                        desc: 'Natural slate roofing'
-                    },
-                    {
-                        text: "Other",
-                        value: 'other',
-                        icon: '🏠',
-                        desc: 'Different roofing material'
-                    }
-                ],
-                field: 'roof_type'
-            },
-            
-            // Step 14: Foundation Type
-            {
-                id: 'foundation_type',
-                message: "What type of foundation does your home have?",
-                type: 'options',
-                options: [
-                    {
-                        text: "Slab",
-                        value: 'slab',
-                        icon: '⬜',
-                        desc: 'Concrete slab foundation'
-                    },
-                    {
-                        text: "Crawl Space",
-                        value: 'crawl_space',
-                        icon: '🏠',
-                        desc: 'Raised foundation with crawl space'
-                    },
-                    {
-                        text: "Basement",
-                        value: 'basement',
-                        icon: '🏠',
-                        desc: 'Full or partial basement'
-                    },
-                    {
-                        text: "Pier/Post",
-                        value: 'pier_post',
-                        icon: '🏗️',
-                        desc: 'Raised on piers or posts'
-                    }
-                ],
-                field: 'foundation_type'
-            },
-            
-            // Step 15: Number of Stories
-            {
-                id: 'stories',
-                message: "How many stories is your home?",
-                type: 'options',
-                options: [
-                    {
-                        text: "1 Story",
-                        value: '1',
-                        icon: '🏠',
-                        desc: 'Single-story home'
-                    },
-                    {
-                        text: "2 Stories",
-                        value: '2',
-                        icon: '🏢',
-                        desc: 'Two-story home'
-                    },
-                    {
-                        text: "3+ Stories",
-                        value: '3',
-                        icon: '🏗️',
-                        desc: 'Three or more stories'
-                    }
-                ],
-                field: 'stories'
-            },
-            
-            // Step 16: Bedrooms
-            {
-                id: 'bedrooms',
-                message: "How many bedrooms does your home have?",
-                type: 'input',
-                inputType: 'number',
-                placeholder: '3',
-                field: 'bedrooms',
-                validation: (value) => parseInt(value) >= 1 && parseInt(value) <= 20
-            },
-            
-            // Step 17: Bathrooms
-            {
-                id: 'bathrooms',
-                message: "How many bathrooms does your home have? (include half baths)",
-                type: 'input',
-                inputType: 'number',
-                placeholder: '2',
-                field: 'bathrooms',
-                validation: (value) => parseInt(value) >= 1 && parseInt(value) <= 20
-            },
-            
-            // Step 18: Garage
-            {
-                id: 'garage',
-                message: "Does your home have a garage?",
-                type: 'options',
-                options: [
-                    {
-                        text: "Yes, attached garage",
-                        value: 'attached',
-                        icon: '🚗',
-                        desc: 'Garage attached to house'
-                    },
-                    {
-                        text: "Yes, detached garage",
-                        value: 'detached',
-                        icon: '🏠',
-                        desc: 'Separate garage building'
-                    },
-                    {
-                        text: "No garage",
-                        value: 'none',
-                        icon: '🚫',
-                        desc: 'No garage on property'
-                    }
-                ],
-                field: 'garage'
-            },
-            
-            // Step 19: Pool
-            {
-                id: 'pool',
-                message: "Do you have a swimming pool on your property?",
-                type: 'options',
-                options: [
-                    {
-                        text: "Yes, in-ground pool",
-                        value: 'inground',
-                        icon: '🏊‍♀️',
-                        desc: 'Permanent in-ground swimming pool'
-                    },
-                    {
-                        text: "Yes, above-ground pool",
-                        value: 'aboveground',
-                        icon: '🏊‍♂️',
-                        desc: 'Above-ground pool'
-                    },
-                    {
-                        text: "No pool",
-                        value: 'none',
-                        icon: '🚫',
-                        desc: 'No swimming pool'
-                    }
-                ],
-                field: 'pool'
-            },
-            
-            // Step 20: Safety Features - Smoke Detectors
-            {
-                id: 'smoke_detectors',
-                message: "Great! Now let's talk about safety features. 🛡️\n\nDoes your home have working smoke detectors?",
-                type: 'options',
-                options: [
-                    {
-                        text: "Yes, hardwired",
-                        value: 'hardwired',
-                        icon: '🔥',
-                        desc: 'Permanent hardwired smoke detectors'
-                    },
-                    {
-                        text: "Yes, battery powered",
-                        value: 'battery',
-                        icon: '🔋',
-                        desc: 'Battery-powered smoke detectors'
-                    },
-                    {
-                        text: "No",
-                        value: 'none',
-                        icon: '🚫',
-                        desc: 'No smoke detectors installed'
-                    }
-                ],
-                field: 'smoke_detectors'
-            },
-            
-            // Step 21: Security System
-            {
-                id: 'security_system',
-                message: "Do you have a security/alarm system?",
-                type: 'options',
-                options: [
-                    {
-                        text: "Yes, monitored system",
-                        value: 'monitored',
-                        icon: '🔒',
-                        desc: 'Professional monitoring service'
-                    },
-                    {
-                        text: "Yes, self-monitored",
-                        value: 'self_monitored',
-                        icon: '📱',
-                        desc: 'DIY/self-monitored system'
-                    },
-                    {
-                        text: "No security system",
-                        value: 'none',
-                        icon: '🚫',
-                        desc: 'No alarm system installed'
-                    }
-                ],
-                field: 'security_system'
-            },
-            
-            // Step 22: Previous Claims
-            {
-                id: 'previous_claims',
-                message: "Have you filed any home insurance claims in the past 5 years?",
-                type: 'options',
-                options: [
-                    {
-                        text: "No claims",
-                        value: 'none',
-                        icon: '✅',
-                        desc: 'Clean insurance history'
-                    },
-                    {
-                        text: "1-2 small claims",
-                        value: 'few',
-                        icon: '📋',
-                        desc: 'Minor claims under $5,000'
-                    },
-                    {
-                        text: "Multiple or large claims",
-                        value: 'many',
-                        icon: '📄',
-                        desc: 'Several claims or major damage'
-                    }
-                ],
-                field: 'claims_history'
-            },
-            
-            // Step 23: Coverage Preference
-            {
-                id: 'coverage_preference',
-                message: "What level of protection are you looking for?",
-                type: 'options',
-                options: [
-                    {
-                        text: "Essential Coverage",
-                        value: 'basic',
-                        icon: '🛡️',
-                        desc: 'Fire, theft, basic protection'
-                    },
-                    {
-                        text: "Comprehensive Coverage",
-                        value: 'standard',
-                        icon: '🏠',
-                        desc: 'Full protection + weather events'
-                    },
-                    {
-                        text: "Premium Coverage",
-                        value: 'premium',
-                        icon: '💎',
-                        desc: 'Maximum protection + high-value items'
-                    }
-                ],
-                field: 'coverage_preference'
-            },
-            
-            // Step 24: Deductible Preference
-            {
-                id: 'deductible_preference',
-                message: "What deductible amount would you prefer? (Higher deductible = lower premium)",
-                type: 'options',
-                options: [
-                    {
-                        text: "$500 Deductible",
-                        value: '500',
-                        icon: '💰',
-                        desc: 'Lower deductible, higher premium'
-                    },
-                    {
-                        text: "$1,000 Deductible",
-                        value: '1000',
-                        icon: '💳',
-                        desc: 'Balanced option'
-                    },
-                    {
-                        text: "$2,500 Deductible",
-                        value: '2500',
-                        icon: '💎',
-                        desc: 'Higher deductible, lower premium'
-                    },
-                    {
-                        text: "$5,000 Deductible",
-                        value: '5000',
-                        icon: '🏦',
-                        desc: 'Highest deductible, lowest premium'
-                    }
-                ],
-                field: 'deductible'
-            },
-            
-            // Step 25: Generate quote
-            {
-                id: 'generate_quote',
-                message: "Alhamdulillah! I have everything I need to calculate your personalized Shariah-compliant home insurance quote.\n\nLet me work on this for you...",
-                type: 'loading'
-            }
-        ];
-
-        function startConversation() {
-            document.getElementById('welcomeScreen').style.display = 'none';
-            document.getElementById('chatInterface').classList.add('active');
-            
-            // Start the conversation flow
-            setTimeout(() => {
-                showNextStep();
-            }, 500);
-        }
-
-        function showNextStep() {
-            const step = conversationFlow[conversationStep];
-            if (!step) return;
-
-            updateProgress();
-            
-            // Check for conditional steps
-            if (step.id === 'existing_login' && userData.user_type !== 'existing_customer') {
-                conversationStep++;
-                showNextStep();
-                return;
-            }
-            
-            if (step.id === 'new_customer_welcome' && userData.user_type !== 'new_customer') {
-                conversationStep++;
-                showNextStep();
-                return;
-            }
-
-            showTypingIndicator();
-            
-            setTimeout(() => {
-                hideTypingIndicator();
-                addAgentMessage(step);
-                
-                if (step.type === 'loading') {
-                    handleLoadingStep();
-                } else {
-                    showInputInterface(step);
-                }
-            }, 1500);
-        }
-
-        function addAgentMessage(step) {
-            const chatMessages = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message agent';
-            
-            let messageText = step.message;
-            if (typeof messageText === 'function') {
-                messageText = messageText(userData.full_name);
-            }
-            
-            messageDiv.innerHTML = `
-                <div class="message-avatar">🤖</div>
-                <div class="message-content">${messageText.replace(/\n/g, '<br>')}</div>
-            `;
-            
-            chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function addUserMessage(text) {
-            const chatMessages = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message user';
-            
-            messageDiv.innerHTML = `
-                <div class="message-content">${text}</div>
-            `;
-            
-            chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function showInputInterface(step) {
-            hideAllInputs();
-            
-            if (step.type === 'input') {
-                showTextInput(step);
-            } else if (step.type === 'options') {
-                showOptions(step);
-            }
-        }
-
-        function showTextInput(step) {
-            const textInput = document.getElementById('textInput');
-            const userInput = document.getElementById('userInput');
-            const sendBtn = document.getElementById('sendBtn');
-            
-            userInput.type = step.inputType || 'text';
-            userInput.placeholder = step.placeholder || 'Type your answer...';
-            userInput.value = '';
-            
-            textInput.classList.add('active');
-            userInput.focus();
-            
-            // Set up validation
-            userInput.oninput = function() {
-                const isValid = step.validation ? step.validation(this.value) : this.value.trim().length > 0;
-                sendBtn.disabled = !isValid;
-                sendBtn.style.opacity = isValid ? '1' : '0.5';
-            };
-            
-            // Handle enter key
-            userInput.onkeypress = function(e) {
-                if (e.key === 'Enter' && !sendBtn.disabled) {
-                    sendMessage();
-                }
-            };
-        }
-
-        function showOptions(step) {
-            const optionsContainer = document.getElementById('optionsContainer');
-            const chatMessages = document.getElementById('chatMessages');
-            optionsContainer.innerHTML = '';
-            
-            // Add class to reduce chat messages height
-            chatMessages.classList.add('with-options');
-            
-            step.options.forEach(option => {
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'option-button';
-                optionDiv.onclick = () => selectOption(option, step);
-                
-                optionDiv.innerHTML = `
-                    <div class="option-icon">${option.icon}</div>
-                    <div class="option-text">
-                        <div class="option-title">${option.text}</div>
-                        <div class="option-desc">${option.desc}</div>
-                    </div>
-                `;
-                
-                optionsContainer.appendChild(optionDiv);
             });
-            
-            optionsContainer.classList.add('active');
-        }
+        }, observerOptions);
 
-        function hideAllInputs() {
-            const chatMessages = document.getElementById('chatMessages');
-            
-            document.getElementById('textInput').classList.remove('active');
-            document.getElementById('optionsContainer').classList.remove('active');
-            document.getElementById('loadingIndicator').classList.remove('active');
-            
-            // Remove the height restriction when hiding options
-            chatMessages.classList.remove('with-options');
-        }
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+            observer.observe(el);
+        });
 
-        function sendMessage() {
-            const step = conversationFlow[conversationStep];
-            const userInput = document.getElementById('userInput');
-            const value = userInput.value.trim();
+        // Enhanced header scroll effect
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            const currentScrollY = window.scrollY;
             
-            if (!value) return;
-            
-            // Validate input
-            if (step.validation && !step.validation(value)) {
-                userInput.style.borderColor = 'var(--error)';
-                setTimeout(() => {
-                    userInput.style.borderColor = '';
-                }, 2000);
-                return;
+            if (currentScrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
             
-            // Add user message
-            addUserMessage(value);
-            
-            // Store data
-            userData[step.field] = value;
-            
-            // Hide input and proceed
-            hideAllInputs();
-            conversationStep++;
-            
-            setTimeout(() => {
-                showNextStep();
-            }, 1000);
-        }
+            lastScrollY = currentScrollY;
+        });
 
-        function selectOption(option, step) {
-            // Add user message
-            addUserMessage(option.text);
-            
-            // Store data
-            userData[step.field] = option.value;
-            
-            // Hide options and proceed
-            hideAllInputs();
-            conversationStep++;
-            
-            setTimeout(() => {
-                showNextStep();
-            }, 1000);
-        }
-
-        function showTypingIndicator() {
-            document.getElementById('typingIndicator').style.display = 'flex';
-        }
-
-        function hideTypingIndicator() {
-            document.getElementById('typingIndicator').style.display = 'none';
-        }
-
-        function handleLoadingStep() {
-            document.getElementById('loadingIndicator').classList.add('active');
-            
-            // Simulate quote calculation
-            setTimeout(() => {
-                hideAllInputs();
-                showQuoteResult();
-            }, 3000);
-        }
-
-        function showQuoteResult() {
-            // Calculate quote based on user data
-            const quote = calculateQuote(userData);
-            
-            showTypingIndicator();
-            
-            setTimeout(() => {
-                hideTypingIndicator();
-                
-                const chatMessages = document.getElementById('chatMessages');
-                const messageDiv = document.createElement('div');
-                messageDiv.className = 'message agent';
-                
-                messageDiv.innerHTML = `
-                    <div class="message-avatar">🤖</div>
-                    <div class="message-content">
-                        <div style="text-align: center; padding: 1rem 0;">
-                            <h3 style="color: var(--deep-blue); font-family: 'Amiri', serif; margin-bottom: 1rem;">
-                                Your Shariah-Compliant Quote is Ready! 🎉
-                            </h3>
-                            <div style="font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--primary-gold), var(--emerald)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 1rem 0;">
-                                ${quote.monthly}/month
-                            </div>
-                            <div style="color: var(--text-light); margin-bottom: 2rem;">Annual Premium: ${quote.annual}</div>
-                            
-                            <div style="background: var(--cream); border-radius: 15px; padding: 1.5rem; margin: 1rem 0; text-align: left;">
-                                <h4 style="color: var(--deep-blue); margin-bottom: 1rem; font-family: 'Amiri', serif;">
-                                    ☪ Your Coverage Details:
-                                </h4>
-                                <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem;">
-                                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                                        <span style="color: var(--success);">✓</span> Dwelling: ${quote.dwelling_limit.toLocaleString()}
-                                    </li>
-                                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                                        <span style="color: var(--success);">✓</span> Personal Property: ${(quote.dwelling_limit * 0.75).toLocaleString()}
-                                    </li>
-                                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                                        <span style="color: var(--success);">✓</span> Liability: ${Math.min(quote.dwelling_limit, 500000).toLocaleString()}
-                                    </li>
-                                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                                        <span style="color: var(--success);">✓</span> Deductible: ${userData.deductible}
-                                    </li>
-                                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                                        <span style="color: var(--success);">✓</span> 24/7 Claims Support
-                                    </li>
-                                    <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                                        <span style="color: var(--success);">✓</span> Emergency Repairs Coverage
-                                    </li>
-                                </ul>
-                            </div>
-                            
-                            ${quote.discounts.length > 0 ? `
-                            <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(46, 139, 87, 0.1)); border: 1px solid var(--success); border-radius: 15px; padding: 1rem; margin: 1rem 0;">
-                                <h4 style="color: var(--emerald); margin-bottom: 0.5rem; font-size: 0.95rem;">
-                                    🎉 Applied Discounts:
-                                </h4>
-                                <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem;">
-                                    ${quote.discounts.map(discount => `
-                                        <li style="padding: 0.2rem 0; color: var(--emerald);">• ${discount}</li>
-                                    `).join('')}
-                                </ul>
-                            </div>
-                            ` : ''}
-                            
-                            <div style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(46, 139, 87, 0.1)); border: 1px solid var(--primary-gold); border-radius: 15px; padding: 1rem; margin: 1rem 0; border-left: 4px solid var(--primary-gold);">
-                                <h4 style="color: var(--deep-blue); margin-bottom: 0.5rem; font-family: 'Amiri', serif; font-size: 0.95rem;">
-                                    ☪ Islamic Assurance
-                                </h4>
-                                <p style="color: var(--text-light); font-size: 0.8rem; margin: 0; line-height: 1.4;">
-                                    This quote is 100% Shariah-compliant, reviewed by our Islamic Advisory Board. 
-                                    No riba, no gharar, no haram investments.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-                
-                // Show final options
-                setTimeout(() => {
-                    showFinalOptions();
-                }, 1500);
-            }, 2000);
-        }
-
-        function showFinalOptions() {
-            const optionsContainer = document.getElementById('optionsContainer');
-            const chatMessages = document.getElementById('chatMessages');
-            optionsContainer.innerHTML = '';
-            
-            // Add class to reduce chat messages height
-            chatMessages.classList.add('with-options');
-            
-            const finalOptions = [
-                {
-                    text: "Purchase This Policy",
-                    icon: '✅',
-                    desc: 'Proceed with this coverage',
-                    action: 'proceed'
-                },
-                {
-                    text: "Customize Coverage",
-                    icon: '⚙️',
-                    desc: 'Adjust limits and options',
-                    action: 'customize'
-                },
-                {
-                    text: "Speak with Agent",
-                    icon: '📞',
-                    desc: 'Talk to a specialist',
-                    action: 'agent'
-                },
-                {
-                    text: "Email Quote Details",
-                    icon: '📧',
-                    desc: 'Send complete quote to email',
-                    action: 'email'
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
-            ];
-            
-            finalOptions.forEach(option => {
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'option-button';
-                optionDiv.onclick = () => handleFinalAction(option.action);
-                
-                optionDiv.innerHTML = `
-                    <div class="option-icon">${option.icon}</div>
-                    <div class="option-text">
-                        <div class="option-title">${option.text}</div>
-                        <div class="option-desc">${option.desc}</div>
-                    </div>
-                `;
-                
-                optionsContainer.appendChild(optionDiv);
-            });
-            
-            optionsContainer.classList.add('active');
-        }
-
-        function calculateQuote(data) {
-            // Base premium calculation
-            let basePremium = 800; // Annual base premium
-            
-            // Property type adjustments
-            const propertyMultipliers = {
-                'single_family': 1.0,
-                'apartment': 0.6,
-                'townhouse': 0.8,
-                'duplex': 1.2
-            };
-            
-            // Construction year adjustments (older = higher risk)
-            const currentYear = new Date().getFullYear();
-            const houseAge = currentYear - parseInt(data.construction_year || currentYear);
-            let ageMultiplier = 1.0;
-            if (houseAge > 50) ageMultiplier = 1.4;
-            else if (houseAge > 30) ageMultiplier = 1.2;
-            else if (houseAge > 15) ageMultiplier = 1.1;
-            else if (houseAge > 5) ageMultiplier = 1.0;
-            else ageMultiplier = 0.95; // New construction discount
-            
-            // Home value adjustments - coverage limit
-            const homeValue = parseInt(data.home_value || 300000);
-            const dwellingLimit = Math.min(homeValue * 1.2, homeValue + 100000); // 120% of value or +100k, whichever is less
-            
-            // Calculate premium based on coverage amount
-            const coverageMultiplier = dwellingLimit / 300000; // Base coverage is 300k
-            
-            // Construction material adjustments
-            const materialMultipliers = {
-                'frame': 1.0,
-                'masonry': 0.85, // Fire resistant
-                'steel': 0.9,
-                'mixed': 1.05
-            };
-            
-            // Roof type adjustments
-            const roofMultipliers = {
-                'composition_shingle': 1.0,
-                'tile': 0.9, // More durable
-                'metal': 0.85, // Fire/wind resistant
-                'slate': 0.8, // Most durable
-                'other': 1.1
-            };
-            
-            // Foundation adjustments
-            const foundationMultipliers = {
-                'slab': 1.0,
-                'crawl_space': 1.05,
-                'basement': 1.1, // Water damage risk
-                'pier_post': 1.15 // Flood risk
-            };
-            
-            // Square footage adjustment (larger = more to insure)
-            const sqft = parseInt(data.square_footage || 2000);
-            const sqftMultiplier = Math.min(Math.max(sqft / 2000, 0.7), 2.0); // Between 70% and 200%
-            
-            // Safety features discounts
-            const discounts = [];
-            let safetyMultiplier = 1.0;
-            
-            if (data.smoke_detectors && data.smoke_detectors !== 'none') {
-                safetyMultiplier *= 0.95;
-                discounts.push('Smoke Detector Discount (5%)');
-            }
-            
-            if (data.security_system === 'monitored') {
-                safetyMultiplier *= 0.9;
-                discounts.push('Monitored Security System Discount (10%)');
-            } else if (data.security_system === 'self_monitored') {
-                safetyMultiplier *= 0.95;
-                discounts.push('Security System Discount (5%)');
-            }
-            
-            // Claims history adjustment
-            const claimsMultipliers = {
-                'none': 0.9, // No claims discount
-                'few': 1.0,
-                'many': 1.3
-            };
-            
-            if (data.claims_history === 'none') {
-                discounts.push('Claims-Free Discount (10%)');
-            }
-            
-            // Coverage preference adjustments
-            const coverageMultipliers = {
-                'basic': 0.8,
-                'standard': 1.0,
-                'premium': 1.4
-            };
-            
-            // Pool surcharge
-            let poolSurcharge = 0;
-            if (data.pool === 'inground') {
-                poolSurcharge = 150; // Annual surcharge
-            } else if (data.pool === 'aboveground') {
-                poolSurcharge = 75;
-            }
-            
-            // Deductible adjustment (higher deductible = lower premium)
-            const deductibleMultipliers = {
-                '500': 1.15,
-                '1000': 1.0,
-                '2500': 0.85,
-                '5000': 0.7
-            };
-            
-            // Calculate final premium
-            const annualPremium = Math.round(
-                (basePremium * 
-                (propertyMultipliers[data.property_type] || 1.0) *
-                ageMultiplier *
-                coverageMultiplier *
-                (materialMultipliers[data.construction_material] || 1.0) *
-                (roofMultipliers[data.roof_type] || 1.0) *
-                (foundationMultipliers[data.foundation_type] || 1.0) *
-                sqftMultiplier *
-                safetyMultiplier *
-                (claimsMultipliers[data.claims_history] || 1.0) *
-                (coverageMultipliers[data.coverage_preference] || 1.0) *
-                (deductibleMultipliers[data.deductible] || 1.0)) + 
-                poolSurcharge
-            );
-            
-            const monthlyPremium = Math.round(annualPremium / 12);
-            
-            return {
-                monthly: monthlyPremium,
-                annual: annualPremium,
-                dwelling_limit: dwellingLimit,
-                discounts: discounts
-            };
-        }
-
-        function handleFinalAction(action) {
-            hideAllInputs();
-            
-            switch(action) {
-                case 'proceed':
-                    showTypingIndicator();
-                    setTimeout(() => {
-                        hideTypingIndicator();
-                        addAgentMessage({
-                            message: "Excellent choice! 🎉\n\nI'm connecting you with our underwriting team to finalize your Shariah-compliant policy. You'll receive:\n\n• Policy documents within 24 hours\n• Payment setup instructions\n• Your Islamic compliance certificate\n• Direct contact for your account manager\n\nBarakallahu feeki for choosing Takaful! Your home will be protected according to Islamic principles.",
-                        });
-                        
-                        // Here you would typically send the data to your backend
-                        console.log('Quote data to be submitted:', userData);
-                    }, 1500);
-                    break;
-                    
-                case 'customize':
-                    showTypingIndicator();
-                    setTimeout(() => {
-                        hideTypingIndicator();
-                        addAgentMessage({
-                            message: "Perfect! Our coverage specialist will help you customize your policy to fit your exact needs and budget.\n\nThey'll contact you within 15 minutes to discuss:\n• Adjusting coverage limits\n• Adding optional coverages\n• Optimizing your deductible\n• Special endorsements\n\nYour quote reference number is: TKF-" + Date.now().toString().slice(-6),
-                        });
-                    }, 1500);
-                    break;
-                    
-                case 'agent':
-                    showTypingIndicator();
-                    setTimeout(() => {
-                        hideTypingIndicator();
-                        addAgentMessage({
-                            message: "Wonderful! I'm scheduling a call with one of our licensed Takaful specialists right now.\n\nExpected call time: Within 10 minutes\nSpecialist: Will have your complete quote ready\nTopics: Coverage details, Islamic compliance, next steps\n\nThey'll answer any questions about our Shariah-compliant approach and help you move forward.\n\nJazakallahu khairan for your patience!",
-                        });
-                    }, 1500);
-                    break;
-                    
-                case 'email':
-                    showTypingIndicator();
-                    setTimeout(() => {
-                        hideTypingIndicator();
-                        addAgentMessage({
-                            message: `Sending complete quote details to ${userData.email} now...\n\nYour email will include:\n📧 Detailed coverage breakdown\n📊 Premium calculation\n📜 Islamic compliance certificate\n📋 Policy application\n📞 Direct contact information\n🔒 Secure payment portal link\n\nExpected delivery: 2-3 minutes\nQuote reference: TKF-${Date.now().toString().slice(-6)}\n\nAlhamdulillah! Thank you for choosing Takaful for your home protection needs.`,
-                        });
-                        
-                        // Here you would send the quote data to your email service
-                        console.log('Email quote data:', userData);
-                    }, 1500);
-                    break;
-            }
-        }
-
-        function updateProgress() {
-            const progressTexts = [
-                'Getting Started',           // 0
-                'Account Check',             // 1
-                'Personal Info',             // 2
-                'Contact Details',           // 3
-                'Phone Number',              // 4
-                'Home Address',              // 5
-                'Location Details',          // 6
-                'State & ZIP',               // 7-8
-                'Property Type',             // 9
-                'Construction Details',      // 10
-                'Home Value',                // 11
-                'Square Footage',            // 12
-                'Building Materials',        // 13
-                'Roof & Foundation',         // 14-15
-                'Home Features',             // 16-19
-                'Safety Features',           // 20-21
-                'Claims History',            // 22
-                'Coverage Options',          // 23
-                'Deductible',                // 24
-                'Calculating Quote'          // 25
-            ];
-            
-            const currentProgress = Math.min(conversationStep, progressTexts.length - 1);
-            document.getElementById('progressText').textContent = progressTexts[currentProgress];
-        }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize any necessary data
-            console.log('Takaful Quote System Initialized');
-            
-            // Set up global error handling
-            window.addEventListener('error', function(e) {
-                console.error('Application error:', e);
             });
         });
 
-        // Utility function to format user input for display
-        function formatUserInput(value, field) {
-            switch(field) {
-                case 'phone_number':
-                    // Format phone number for display
-                    const cleaned = value.replace(/\D/g, '');
-                    if (cleaned.length === 10) {
-                        return `(${cleaned.slice(0,3)}) ${cleaned.slice(3,6)}-${cleaned.slice(6)}`;
+        // Animated counter for stats
+        const animateCounters = () => {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const increment = target / 100;
+                let current = 0;
+                
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
                     }
-                    return value;
+                };
                 
-                case 'zip_code':
-                    // Ensure ZIP code formatting
-                    return value.trim().toUpperCase();
-                
-                case 'state':
-                    // Uppercase state abbreviation
-                    return value.trim().toUpperCase();
-                
-                case 'home_value':
-                case 'square_footage':
-                case 'construction_year':
-                case 'bedrooms':
-                case 'bathrooms':
-                    // Format numbers with proper separators
-                    return parseInt(value).toLocaleString();
-                
-                default:
-                    return value;
-            }
-        }
+                updateCounter();
+            });
+        };
 
-        // Function to validate ZIP code more thoroughly
-        function validateZipCode(zip) {
-            const cleaned = zip.trim().replace(/\s+/g, '');
-            // Standard 5-digit ZIP or ZIP+4
-            return /^\d{5}(-\d{4})?$/.test(cleaned);
-        }
-
-        // Function to validate phone number
-        function validatePhoneNumber(phone) {
-            const cleaned = phone.replace(/\D/g, '');
-            return cleaned.length >= 10 && cleaned.length <= 11;
-        }
-
-        // Enhanced user input formatting in sendMessage function
-        function sendMessage() {
-            const step = conversationFlow[conversationStep];
-            const userInput = document.getElementById('userInput');
-            let value = userInput.value.trim();
-            
-            if (!value) return;
-            
-            // Apply specific formatting based on field type
-            if (step.field === 'phone_number') {
-                value = value.replace(/\D/g, ''); // Remove non-digits for storage
-            }
-            
-            // Validate input
-            if (step.validation && !step.validation(userInput.value.trim())) {
-                userInput.style.borderColor = 'var(--error)';
-                
-                // Show specific error message
-                let errorMessage = 'Please check your input';
-                switch(step.field) {
-                    case 'email':
-                        errorMessage = 'Please enter a valid email address';
-                        break;
-                    case 'phone_number':
-                        errorMessage = 'Please enter a valid phone number';
-                        break;
-                    case 'zip_code':
-                        errorMessage = 'Please enter a valid ZIP code (12345 or 12345-6789)';
-                        break;
-                    case 'construction_year':
-                        errorMessage = 'Please enter a valid year between 1800 and current year';
-                        break;
-                    case 'home_value':
-                        errorMessage = 'Please enter a value of at least $50,000';
-                        break;
-                    case 'square_footage':
-                        errorMessage = 'Please enter at least 400 square feet';
-                        break;
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
                 }
-                
-                // Could show error message in UI here
-                setTimeout(() => {
-                    userInput.style.borderColor = '';
-                }, 2000);
-                return;
-            }
-            
-            // Format value for display
-            const displayValue = formatUserInput(userInput.value.trim(), step.field);
-            
-            // Add user message with formatted display
-            addUserMessage(displayValue);
-            
-            // Store actual value (may be different from display)
-            userData[step.field] = value;
-            
-            // Hide input and proceed
-            hideAllInputs();
-            conversationStep++;
-            
-            setTimeout(() => {
-                showNextStep();
-            }, 1000);
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
         }
+
+        // Create floating particles
+        const createParticles = () => {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = particle.style.height = (Math.random() * 4 + 1) + 'px';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        };
+
+        // Initialize particles
+        createParticles();
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Enhanced button hover effects
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.02)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            const heroPattern = document.querySelector('.islamic-pattern-1');
+            if (heroPattern) {
+                heroPattern.style.transform = `translateY(${rate}px)`;
+            }
+        });
     </script>
 </body>
 </html>
