@@ -632,14 +632,14 @@
             <div class="portal-card" onclick="openPortal('agent')">
                 <div class="portal-icon">👥</div>
                 <h3>Agent Portal</h3>
-                <p>Licensed agents can modify client-specific risk factors and weights for quote customization.</p>
+                <p>Licensed agents can modify state-level risk factors and weights that apply to all properties in their authorized states.</p>
                 <div class="permissions-preview">
                     <h4>Configuration Access:</h4>
                     <ul class="permissions-list">
-                        <li>Adjust risk factor weights</li>
-                        <li>Add custom risk factors</li>
-                        <li>Modify security feature scores</li>
-                        <li>Request document exceptions</li>
+                        <li>Adjust state-wide risk factor weights</li>
+                        <li>Add custom risk factors for entire states</li>
+                        <li>Modify state-level security feature scores</li>
+                        <li>Request state-wide document exceptions</li>
                     </ul>
                 </div>
             </div>
@@ -647,14 +647,14 @@
             <div class="portal-card" onclick="openPortal('accountManager')">
                 <div class="portal-icon">⚖️</div>
                 <h3>Account Manager Portal</h3>
-                <p>Approve or reject rule changes and manage system configurations across all states.</p>
+                <p>Approve or reject state-level and global rule changes that affect system-wide operations.</p>
                 <div class="permissions-preview">
                     <h4>Configuration Access:</h4>
                     <ul class="permissions-list">
-                        <li>Approve/reject rule changes</li>
-                        <li>Manage global tax rates</li>
-                        <li>Override state regulations</li>
-                        <li>Audit trail management</li>
+                        <li>Approve/reject state-level rule changes</li>
+                        <li>Manage global tax rates and fees</li>
+                        <li>Override state regulations system-wide</li>
+                        <li>Audit trail for all state operations</li>
                     </ul>
                 </div>
             </div>
@@ -662,14 +662,14 @@
             <div class="portal-card" onclick="openPortal('underwriter')">
                 <div class="portal-icon">🎯</div>
                 <h3>Underwriter Workbench</h3>
-                <p>Configure premium rules, risk models, and underwriting guidelines at state level.</p>
+                <p>Configure state-wide premium rules, risk models, and regulations that apply to all properties in each state.</p>
                 <div class="permissions-preview">
                     <h4>Configuration Access:</h4>
                     <ul class="permissions-list">
-                        <li>Set premium base rates</li>
-                        <li>Configure risk models</li>
-                        <li>Define underwriting rules</li>
-                        <li>Manage state regulations</li>
+                        <li>Set state-wide premium base rates</li>
+                        <li>Configure state-level risk models</li>
+                        <li>Define state-wide underwriting rules</li>
+                        <li>Manage state-specific regulations</li>
                     </ul>
                 </div>
             </div>
@@ -731,13 +731,27 @@
             <div class="main-content">
                 <div class="content-section active" id="agent-riskFactors">
                     <div class="section-header">
-                        <h2>Risk Factor Weight Configuration</h2>
-                        <p>Adjust risk factor weights for specific client quotes. Changes require manager approval.</p>
+                        <h2>State-Level Risk Factor Weight Configuration</h2>
+                        <p>Adjust risk factor weights that apply to all properties within your authorized states. Changes require manager approval.</p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <label for="agentStateSelector" style="font-weight: 600; margin-right: 1rem;">Select State:</label>
+                        <select id="agentStateSelector" style="padding: 0.8rem; border: 2px solid var(--cream); border-radius: 8px; margin-right: 1rem;">
+                            <option>California</option>
+                            <option>Florida</option>
+                            <option>Texas</option>
+                            <option>New York</option>
+                        </select>
+                        <button class="btn btn-secondary">Load State Configuration</button>
                     </div>
 
                     <div class="config-grid">
                         <div class="config-card">
-                            <h3>Property Characteristics <span class="permission-badge">Full Access</span></h3>
+                            <h3>Property Characteristics (California) <span class="permission-badge">Full Access</span></h3>
+                            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">
+                                These weights apply to all properties written in California
+                            </p>
                             <div class="form-grid">
                                 <div class="form-group">
                                     <label>Age of Property Weight</label>
@@ -756,11 +770,14 @@
                                     <input type="number" value="1.35" step="0.01" min="0.5" max="3.0">
                                 </div>
                             </div>
-                            <button class="btn" style="margin-top: 1rem;">Request Weight Changes</button>
+                            <button class="btn" style="margin-top: 1rem;">Request State-Wide Weight Changes</button>
                         </div>
 
                         <div class="config-card">
-                            <h3>Location Factors <span class="permission-badge">Full Access</span></h3>
+                            <h3>Location Factors (California) <span class="permission-badge">Full Access</span></h3>
+                            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">
+                                Location-based weights affecting all California properties
+                            </p>
                             <div class="form-grid">
                                 <div class="form-group">
                                     <label>Fire Protection Class Weight</label>
@@ -771,42 +788,45 @@
                                     <input type="number" value="2.15" step="0.01" min="0.5" max="5.0">
                                 </div>
                                 <div class="form-group">
-                                    <label>Crime Rate Weight</label>
-                                    <input type="number" value="1.30" step="0.01" min="0.5" max="3.0">
+                                    <label>Wildfire Risk Zone Weight</label>
+                                    <input type="number" value="3.45" step="0.01" min="1.0" max="5.0">
                                 </div>
                                 <div class="form-group">
-                                    <label>Distance to Coast Weight</label>
-                                    <input type="number" value="1.80" step="0.01" min="0.5" max="4.0">
+                                    <label>Earthquake Zone Weight</label>
+                                    <input type="number" value="1.95" step="0.01" min="0.5" max="4.0">
                                 </div>
                             </div>
-                            <button class="btn" style="margin-top: 1rem;">Submit for Approval</button>
+                            <button class="btn" style="margin-top: 1rem;">Submit State Configuration</button>
                         </div>
 
                         <div class="config-card">
-                            <h3>Base Premium Rules <span class="permission-badge read-only">Read Only</span></h3>
+                            <h3>Base Premium Rules (California) <span class="permission-badge read-only">Read Only</span></h3>
+                            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">
+                                Contact underwriter to modify state-wide base premium rules
+                            </p>
                             <div class="form-grid">
                                 <div class="form-group">
                                     <label>Base Premium Rate</label>
-                                    <input type="number" value="850.00" disabled>
+                                    <input type="number" value="950.00" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label>Minimum Premium</label>
-                                    <input type="number" value="500.00" disabled>
+                                    <input type="number" value="600.00" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label>Maximum Premium</label>
-                                    <input type="number" value="15000.00" disabled>
+                                    <input type="number" value="25000.00" disabled>
                                 </div>
                             </div>
                             <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
-                                Contact underwriter to modify base premium rules.
+                                Contact underwriter to modify state-wide base premium rules.
                             </p>
                         </div>
                     </div>
 
-                    <h3 style="margin: 2rem 0 1rem 0; color: var(--deep-navy);">Current Risk Model Formula</h3>
+                    <h3 style="margin: 2rem 0 1rem 0; color: var(--deep-navy);">State-Wide Risk Model Formula</h3>
                     <div style="background: var(--light-blue); padding: 2rem; border-radius: 15px; font-family: monospace; font-size: 1.1rem; text-align: center; color: var(--deep-navy);">
-                        Final Premium = Base Premium + Σ(Risk Factors × Weights) - Σ(Security Features × Weights)
+                        Final Premium = State Base Premium + Σ(Risk Factors × State Weights) - Σ(Security Features × State Weights) + State Taxes
                     </div>
                 </div>
 
@@ -859,16 +879,25 @@
 
                 <div class="content-section" id="agent-customFactors">
                     <div class="section-header">
-                        <h2>Custom Risk Factors</h2>
-                        <p>Add client-specific risk factors for unique property characteristics.</p>
+                        <h2>State-Wide Custom Risk Factors</h2>
+                        <p>Add custom risk factors that will apply to all properties in your authorized states.</p>
                     </div>
 
                     <div class="config-card">
-                        <h3>Add New Risk Factor</h3>
+                        <h3>Add New State-Wide Risk Factor</h3>
                         <div class="form-grid">
                             <div class="form-group">
                                 <label>Factor Name</label>
-                                <input type="text" placeholder="e.g., Pool with No Fence">
+                                <input type="text" placeholder="e.g., Swimming Pool with No Fence">
+                            </div>
+                            <div class="form-group">
+                                <label>Applies to State</label>
+                                <select>
+                                    <option>California</option>
+                                    <option>Florida</option>
+                                    <option>Texas</option>
+                                    <option>New York</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Factor Weight</label>
@@ -885,16 +914,17 @@
                             </div>
                             <div class="form-group">
                                 <label>Justification</label>
-                                <textarea placeholder="Explain why this factor affects risk..."></textarea>
+                                <textarea placeholder="Explain why this factor affects risk for all properties in this state..."></textarea>
                             </div>
                         </div>
-                        <button class="btn">Submit Custom Factor</button>
+                        <button class="btn">Submit State-Wide Custom Factor</button>
                     </div>
 
                     <table class="data-table">
                         <thead>
                             <tr>
                                 <th>Factor Name</th>
+                                <th>State</th>
                                 <th>Weight</th>
                                 <th>Category</th>
                                 <th>Status</th>
@@ -904,6 +934,7 @@
                         <tbody>
                             <tr>
                                 <td>Pool without Safety Fence</td>
+                                <td>California</td>
                                 <td>+1.25</td>
                                 <td>Property Characteristics</td>
                                 <td class="status-active">Approved</td>
@@ -911,6 +942,7 @@
                             </tr>
                             <tr>
                                 <td>Home Business Operation</td>
+                                <td>Florida</td>
                                 <td>+1.15</td>
                                 <td>Property Characteristics</td>
                                 <td class="status-pending">Pending</td>
