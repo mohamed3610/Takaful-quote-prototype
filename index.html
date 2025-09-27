@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Takaful - Shariah-Compliant Home Insurance</title>
+    <title>Property Insurance Platform - Configuration Portals</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
         
         :root {
-            --primary-gold: #D4AF37;
-            --dark-gold: #B8941F;
-            --light-gold: #F4E4A6;
-            --deep-blue: #0B2545;
-            --navy: #1e3a5f;
-            --emerald: #2E8B57;
-            --mint: #40E0D0;
-            --cream: #FAF8F3;
-            --pearl: #FEFDF8;
-            --text-dark: #1A1A1A;
-            --text-light: #6B7280;
+            --primary-blue: #667eea;
+            --dark-blue: #5a67d8;
+            --light-blue: #e6fffa;
+            --deep-navy: #2d3748;
+            --emerald: #38b2ac;
+            --mint: #81e6d9;
+            --cream: #f7fafc;
+            --pearl: #ffffff;
+            --text-dark: #1a202c;
+            --text-light: #718096;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --danger: #f56565;
             --shadow: rgba(0, 0, 0, 0.1);
             --shadow-dark: rgba(0, 0, 0, 0.25);
         }
@@ -33,463 +35,59 @@
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
-            overflow-x: hidden;
-        }
-
-        /* Advanced Islamic Patterns */
-        .islamic-pattern-1 {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0.03;
-            background-image: 
-                conic-gradient(from 0deg at 50% 50%, var(--primary-gold) 0deg, transparent 60deg, var(--primary-gold) 120deg, transparent 180deg, var(--primary-gold) 240deg, transparent 300deg, var(--primary-gold) 360deg);
-            background-size: 60px 60px;
-            pointer-events: none;
-            animation: rotatePattern 30s linear infinite;
-        }
-
-        .islamic-pattern-2 {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0.02;
-            background: 
-                radial-gradient(circle at 0% 0%, var(--emerald) 1px, transparent 1px),
-                radial-gradient(circle at 25% 25%, var(--primary-gold) 0.5px, transparent 0.5px),
-                radial-gradient(circle at 50% 50%, var(--mint) 1px, transparent 1px),
-                radial-gradient(circle at 75% 75%, var(--primary-gold) 0.5px, transparent 0.5px),
-                radial-gradient(circle at 100% 100%, var(--emerald) 1px, transparent 1px);
-            background-size: 80px 80px, 40px 40px, 60px 60px, 30px 30px, 90px 90px;
-            background-position: 0 0, 15px 15px, 30px 30px, 45px 45px, 60px 60px;
-            pointer-events: none;
-        }
-
-        /* Floating Elements */
-        .floating-element {
-            position: absolute;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        .floating-element:nth-child(1) { 
-            top: 10%; 
-            left: 10%; 
-            animation-delay: 0s; 
-            font-size: 2rem;
-        }
-        .floating-element:nth-child(2) { 
-            top: 70%; 
-            right: 20%; 
-            animation-delay: 2s; 
-            font-size: 1.5rem;
-        }
-        .floating-element:nth-child(3) { 
-            top: 30%; 
-            right: 10%; 
-            animation-delay: 4s; 
-            font-size: 2.5rem;
-        }
-
-        /* Enhanced Header */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(25px) saturate(180%);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-        }
-
-        header.scrolled {
-            padding: 0.5rem 0;
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-        }
-
-        nav {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-family: 'Amiri', serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .logo::before {
-            content: '☪';
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-            margin: 0;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            font-size: 0.95rem;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary-gold), var(--emerald));
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-gold);
-            transform: translateY(-2px);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .cta-button {
-            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
-            color: white;
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
-        }
-
-        /* Enhanced Hero Section */
-        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--emerald) 100%);
             min-height: 100vh;
-            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--navy) 50%, #2c5aa0 100%);
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="islamic-hero" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M20 5 L35 20 L20 35 L5 20 Z M20 15 L25 20 L20 25 L15 20 Z" fill="%23D4AF37" opacity="0.08"/><circle cx="20" cy="20" r="2" fill="%232E8B57" opacity="0.05"/></pattern></defs><rect width="200" height="200" fill="url(%23islamic-hero)"/></svg>') center/cover;
-            pointer-events: none;
-            animation: backgroundShift 20s ease-in-out infinite;
-        }
-
-        .hero-particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            background: var(--primary-gold);
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: floatParticle 8s linear infinite;
-        }
-
-        .hero-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            align-items: center;
-            z-index: 2;
-            position: relative;
-        }
-
-        .hero-text h1 {
-            font-family: 'Amiri', serif;
-            font-size: 4rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero-text .highlight {
-            background: linear-gradient(135deg, var(--primary-gold), var(--light-gold));
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        .hero-text p {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 3rem;
-            line-height: 1.8;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        .hero-ctas {
-            display: flex;
-            gap: 1.5rem;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
-
-        .cta-primary {
-            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
-            color: white;
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .cta-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .cta-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: var(--primary-gold);
-        }
-
-        .hero-visual {
+        /* Portal Selection Screen */
+        .portal-selector {
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: fadeInRight 1s ease 0.6s both;
-            position: relative;
+            min-height: 100vh;
+            padding: 2rem;
         }
 
-        .hero-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            padding: 3rem;
-            box-shadow: 
-                0 25px 60px rgba(0, 0, 0, 0.2),
-                0 0 0 1px rgba(255, 255, 255, 0.1);
-            transform: rotate(-5deg);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-gold), var(--emerald), var(--mint));
-        }
-
-        .hero-card:hover {
-            transform: rotate(0deg) scale(1.05);
-            box-shadow: 
-                0 35px 80px rgba(0, 0, 0, 0.25),
-                0 0 0 1px rgba(212, 175, 55, 0.2);
-        }
-
-        .house-visual {
-            text-align: center;
-        }
-
-        .house-icon {
-            font-size: 6rem;
-            margin-bottom: 1rem;
-            display: block;
-            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-card h3 {
-            font-family: 'Amiri', serif;
-            font-size: 1.8rem;
-            color: var(--deep-blue);
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-card p {
-            color: var(--text-light);
-            font-size: 1rem;
-        }
-
-        /* Enhanced Features Section */
-        .features {
-            padding: 8rem 0;
-            background: var(--cream);
-            position: relative;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 5rem;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .section-header h2 {
-            font-family: 'Amiri', serif;
-            font-size: 3rem;
-            color: var(--deep-blue);
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .section-header h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-gold), var(--emerald));
-            border-radius: 2px;
-        }
-
-        .section-header p {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        .features-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        .portal-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 3rem;
+            max-width: 1200px;
+            width: 100%;
         }
 
-        .feature-card {
-            background: white;
-            padding: 3.5rem 2.5rem;
+        .portal-card {
+            background: var(--pearl);
             border-radius: 25px;
+            padding: 3rem 2rem;
             text-align: center;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .feature-card::before {
+        .portal-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-gold), var(--emerald));
-            transition: left 0.5s ease;
-        }
-
-        .feature-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
+            left: 0;
             right: 0;
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--emerald));
         }
 
-        .feature-card:hover::before {
-            left: 0;
+        .portal-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.2);
         }
 
-        .feature-card:hover::after {
-            opacity: 0.03;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.12);
-        }
-
-        .feature-icon {
+        .portal-icon {
             width: 100px;
             height: 100px;
-            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
+            background: linear-gradient(135deg, var(--primary-blue), var(--emerald));
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -501,7 +99,7 @@
             overflow: hidden;
         }
 
-        .feature-icon::before {
+        .portal-icon::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -512,385 +110,484 @@
             animation: iconRotate 3s linear infinite;
         }
 
-        .feature-card h3 {
-            font-size: 1.6rem;
-            color: var(--deep-blue);
-            margin-bottom: 1.5rem;
+        .portal-card h3 {
+            font-size: 1.8rem;
+            color: var(--deep-navy);
+            margin-bottom: 1rem;
             font-weight: 600;
-            font-family: 'Amiri', serif;
         }
 
-        .feature-card p {
+        .portal-card p {
             color: var(--text-light);
             line-height: 1.8;
-            font-size: 1rem;
-        }
-
-        /* Stats Section */
-        .stats {
-            background: var(--deep-blue);
-            padding: 6rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stats::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.05), transparent);
-        }
-
-        .stats-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 4rem;
-            text-align: center;
-        }
-
-        .stat-item {
-            color: white;
-        }
-
-        .stat-number {
-            font-size: 4rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-gold), var(--light-gold));
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: block;
-            margin-bottom: 1rem;
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
-
-        /* Enhanced Why Choose Section */
-        .why-choose {
-            padding: 8rem 0;
-            background: white;
-            position: relative;
-        }
-
-        .why-choose-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            align-items: center;
-        }
-
-        .benefits-content h2 {
-            font-family: 'Amiri', serif;
-            font-size: 3rem;
-            color: var(--deep-blue);
             margin-bottom: 2rem;
         }
 
-        .benefits-content p {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 3rem;
-            line-height: 1.8;
+        .portal-card .permissions-preview {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            text-align: left;
         }
 
-        .benefits-list {
+        .permissions-preview h4 {
+            font-size: 1rem;
+            color: var(--deep-navy);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .permissions-list {
             list-style: none;
+            font-size: 0.9rem;
+            color: var(--text-light);
         }
 
-        .benefits-list li {
-            padding: 1.5rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        .permissions-list li {
+            padding: 0.3rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .permissions-list li::before {
+            content: '•';
+            color: var(--emerald);
+            font-weight: bold;
+        }
+
+        /* Main Portal Interface */
+        .main-portal {
+            display: none;
+            min-height: 100vh;
+            background: var(--cream);
+        }
+
+        .main-portal.active {
+            display: block;
+        }
+
+        .header {
+            background: var(--pearl);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            color: var(--deep-navy);
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .user-info {
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
         }
 
-        .benefits-list li:hover {
-            transform: translateX(10px);
-            color: var(--primary-gold);
-        }
-
-        .benefits-list li::before {
-            content: '✓';
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary-gold), var(--emerald));
+        .notification-btn {
+            position: relative;
+            background: var(--light-blue);
+            border: none;
             border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            color: white;
-            flex-shrink: 0;
             font-size: 1.2rem;
+            color: var(--primary-blue);
         }
 
-        .islamic-values {
-            text-align: center;
-        }
-
-        .islamic-values h2 {
-            font-family: 'Amiri', serif;
-            font-size: 2.5rem;
-            color: var(--deep-blue);
-            margin-bottom: 2rem;
-        }
-
-        .value-cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .value-card {
-            background: linear-gradient(135deg, var(--cream), white);
-            padding: 2.5rem 1.5rem;
-            border-radius: 20px;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .value-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-gold), var(--emerald));
-        }
-
-        .value-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-        }
-
-        .value-card .icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .value-card h4 {
-            color: var(--deep-blue);
-            margin-bottom: 1rem;
-            font-family: 'Amiri', serif;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-
-        .value-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        /* Testimonials Section */
-        .testimonials {
-            background: var(--pearl);
-            padding: 8rem 0;
-            position: relative;
-        }
-
-        .testimonials-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            text-align: center;
-        }
-
-        .testimonials h2 {
-            font-family: 'Amiri', serif;
-            font-size: 3rem;
-            color: var(--deep-blue);
-            margin-bottom: 4rem;
-        }
-
-        .testimonial-card {
-            background: white;
-            padding: 3rem 2.5rem;
-            border-radius: 25px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
-            margin: 2rem;
-            position: relative;
-            border-left: 5px solid var(--primary-gold);
-        }
-
-        .testimonial-text {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            color: var(--primary-gold);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        /* Enhanced Final CTA */
-        .final-cta {
-            padding: 8rem 0;
-            background: linear-gradient(135deg, var(--deep-blue), var(--navy), var(--emerald));
-            text-align: center;
+        .notification-btn:hover {
+            background: var(--primary-blue);
             color: white;
-            position: relative;
-            overflow: hidden;
+            transform: scale(1.1);
         }
 
-        .final-cta::before {
-            content: '';
+        .notification-badge {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 25 L75 50 L50 75 L25 50 Z" fill="%23D4AF37" opacity="0.03"/></svg>') center/100px 100px;
-            animation: patternMove 15s linear infinite;
-        }
-
-        .final-cta h2 {
-            font-family: 'Amiri', serif;
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .final-cta p {
-            font-size: 1.3rem;
-            margin-bottom: 3rem;
-            opacity: 0.95;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.8;
-        }
-
-        .cta-buttons {
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
             display: flex;
-            gap: 2rem;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
+            font-size: 0.7rem;
+            font-weight: bold;
         }
 
-        .cta-white {
-            background: white;
-            color: var(--deep-blue);
-            padding: 1.2rem 3rem;
-            font-size: 1.1rem;
+        .back-btn {
+            background: linear-gradient(135deg, var(--primary-blue), var(--emerald));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .portal-layout {
+            display: flex;
+            min-height: calc(100vh - 90px);
+        }
+
+        .sidebar {
+            background: var(--pearl);
+            width: 280px;
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.08);
+            overflow-y: auto;
+        }
+
+        .nav-section {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--cream);
+        }
+
+        .nav-section h3 {
+            padding: 0 1.5rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .nav-item {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: var(--light-blue);
+            border-left-color: var(--emerald);
+        }
+
+        .nav-item.active {
+            background: var(--light-blue);
+            border-left-color: var(--primary-blue);
+            color: var(--primary-blue);
+            font-weight: 500;
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .content-section {
+            display: none;
+            background: var(--pearl);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .section-header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--cream);
+        }
+
+        .section-header h2 {
+            color: var(--deep-navy);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
             font-weight: 600;
         }
 
-        /* Enhanced Footer */
-        footer {
-            background: var(--deep-blue);
-            color: white;
-            padding: 6rem 0 2rem;
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .config-card {
+            background: var(--cream);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
             position: relative;
         }
 
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 4rem;
+        .config-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
         }
 
-        .footer-section h4 {
-            font-family: 'Amiri', serif;
-            color: var(--primary-gold);
-            margin-bottom: 2rem;
-            font-size: 1.4rem;
+        .config-card h3 {
+            color: var(--deep-navy);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .permission-badge {
+            background: var(--success);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .permission-badge.read-only {
+            background: var(--warning);
+        }
+
+        .permission-badge.no-access {
+            background: var(--danger);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: var(--deep-navy);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--cream);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input:disabled,
+        .form-group select:disabled {
+            background: #f1f5f9;
+            color: var(--text-light);
+            cursor: not-allowed;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-blue), var(--emerald));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:disabled {
+            background: var(--text-light);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: var(--text-light);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--cream);
+        }
+
+        .data-table th {
+            background: var(--deep-navy);
+            color: white;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .data-table tr:hover {
+            background: var(--light-blue);
+        }
+
+        .status-active {
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        .status-pending {
+            color: var(--warning);
+            font-weight: 500;
+        }
+
+        .notification-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: var(--pearl);
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notification-panel.open {
+            right: 0;
+        }
+
+        .notification-header {
+            padding: 2rem;
+            border-bottom: 1px solid var(--cream);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-header h3 {
+            color: var(--deep-navy);
+            font-size: 1.3rem;
             font-weight: 600;
         }
 
-        .footer-section p,
-        .footer-section a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            line-height: 2.2;
-            transition: color 0.3s ease;
+        .close-notifications {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
         }
 
-        .footer-section a:hover {
-            color: var(--primary-gold);
-            transform: translateX(5px);
+        .notification-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
         }
 
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 3rem;
-            padding-top: 2rem;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.6);
+        .notification-item {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-blue);
         }
 
-        /* Advanced Animations */
+        .notification-item.warning {
+            border-left-color: var(--warning);
+        }
+
+        .notification-item.success {
+            border-left-color: var(--success);
+        }
+
+        .notification-item h4 {
+            color: var(--deep-navy);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .notification-item p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .notification-time {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        @keyframes shimmer {
-            0%, 100% { background-position: -200% center; }
-            50% { background-position: 200% center; }
-        }
-
-        @keyframes rotatePattern {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes backgroundShift {
-            0%, 100% { transform: translateX(0) translateY(0); }
-            25% { transform: translateX(-10px) translateY(-10px); }
-            50% { transform: translateX(10px) translateY(10px); }
-            75% { transform: translateX(-5px) translateY(15px); }
-        }
-
-        @keyframes floatParticle {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.1; }
-            90% { opacity: 0.1; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
 
         @keyframes iconRotate {
@@ -898,432 +595,1940 @@
             100% { transform: rotate(360deg); }
         }
 
-        @keyframes patternMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 100px 100px; }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .hero-content { gap: 4rem; }
-            .why-choose-content { gap: 4rem; }
-        }
-
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            
-            .hero-content {
+            .portal-grid {
                 grid-template-columns: 1fr;
-                text-align: center;
-                gap: 3rem;
+                gap: 2rem;
             }
             
-            .hero-text h1 { font-size: 2.8rem; }
-            .hero-ctas { justify-content: center; }
+            .portal-layout {
+                flex-direction: column;
+            }
             
-            .features-grid { grid-template-columns: 1fr; }
-            .why-choose-content { grid-template-columns: 1fr; }
-            .value-cards { grid-template-columns: 1fr; }
-            .stats-container { grid-template-columns: repeat(2, 1fr); }
+            .sidebar {
+                width: 100%;
+                order: 2;
+            }
             
-            .final-cta h2 { font-size: 2.5rem; }
-            .cta-buttons { flex-direction: column; align-items: center; }
+            .main-content {
+                order: 1;
+            }
             
-            .section-header h2 { font-size: 2.2rem; }
-            .hero-card { transform: none; margin-top: 2rem; }
-        }
-
-        @media (max-width: 480px) {
-            .hero-text h1 { font-size: 2.2rem; }
-            .stat-number { font-size: 2.5rem; }
-            .stats-container { grid-template-columns: 1fr; }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .slide-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .slide-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
+            .config-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .notification-panel {
+                width: 100%;
+                right: -100%;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Floating Islamic Elements -->
-    <div class="floating-element">☪</div>
-    <div class="floating-element">🕌</div>
-    <div class="floating-element">✨</div>
-
-    <header id="header">
-        <nav>
-            <a href="#" class="logo">Takaful</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#why-choose">Why Choose Us</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <a href="#quote" class="cta-button">Get Quote</a>
-        </nav>
-    </header>
-
-    <section class="hero" id="home">
-        <div class="islamic-pattern-1"></div>
-        <div class="hero-particles" id="particles"></div>
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Protect Your Home with <span class="highlight">Shariah-Compliant</span> Insurance</h1>
-                <p>Experience ultimate peace of mind with our premium halal home insurance solutions. Built on authentic Islamic principles of mutual cooperation, transparency, and shared responsibility for the modern Muslim family.</p>
-                <div class="hero-ctas">
-                    <a href="#quote" class="cta-button cta-primary">Get Instant Quote</a>
-                    <a href="#features" class="cta-button cta-secondary">Discover Benefits</a>
+    <!-- Portal Selection Screen -->
+    <div class="portal-selector" id="portalSelector">
+        <div class="portal-grid">
+            <div class="portal-card" onclick="openPortal('agent')">
+                <div class="portal-icon">👥</div>
+                <h3>Agent Portal</h3>
+                <p>Licensed agents can modify client-specific risk factors and weights for quote customization.</p>
+                <div class="permissions-preview">
+                    <h4>Configuration Access:</h4>
+                    <ul class="permissions-list">
+                        <li>Adjust risk factor weights</li>
+                        <li>Add custom risk factors</li>
+                        <li>Modify security feature scores</li>
+                        <li>Request document exceptions</li>
+                    </ul>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="hero-card">
-                    <div class="house-visual">
-                        <span class="house-icon">🏡</span>
-                        <h3>Your Home, Protected</h3>
-                        <p>Comprehensive coverage that aligns with your Islamic values</p>
-                    </div>
+
+            <div class="portal-card" onclick="openPortal('accountManager')">
+                <div class="portal-icon">⚖️</div>
+                <h3>Account Manager Portal</h3>
+                <p>Approve or reject rule changes and manage system configurations across all states.</p>
+                <div class="permissions-preview">
+                    <h4>Configuration Access:</h4>
+                    <ul class="permissions-list">
+                        <li>Approve/reject rule changes</li>
+                        <li>Manage global tax rates</li>
+                        <li>Override state regulations</li>
+                        <li>Audit trail management</li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section class="stats">
-        <div class="stats-container">
-            <div class="stat-item fade-in">
-                <span class="stat-number" data-target="50000">0</span>
-                <span class="stat-label">Families Protected</span>
-            </div>
-            <div class="stat-item fade-in">
-                <span class="stat-number" data-target="99">0</span>
-                <span class="stat-label">Claims Satisfaction %</span>
-            </div>
-            <div class="stat-item fade-in">
-                <span class="stat-number" data-target="15">0</span>
-                <span class="stat-label">Years Experience</span>
-            </div>
-            <div class="stat-item fade-in">
-                <span class="stat-number" data-target="24">0</span>
-                <span class="stat-label">Hour Support</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="features" id="features">
-        <div class="islamic-pattern-2"></div>
-        <div class="section-header fade-in">
-            <h2>Why Choose Takaful Insurance?</h2>
-            <p>Our comprehensive insurance products are meticulously designed to comply with authentic Islamic law while providing world-class protection for your most valuable asset - your home.</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card fade-in">
-                <div class="feature-icon">☪</div>
-                <h3>100% Shariah Compliant</h3>
-                <p>All our products are rigorously certified by qualified Islamic scholars and fully comply with Islamic principles of finance, ensuring complete peace of mind for practicing Muslims.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🤝</div>
-                <h3>Mutual Cooperation</h3>
-                <p>Built on the beautiful Islamic concept of Ta'awun (mutual assistance), where community members support each other during times of hardship and need.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">💎</div>
-                <h3>Transparent & Ethical</h3>
-                <p>Absolutely no hidden fees, zero interest (riba), and complete transparency in all transactions, policy terms, and investment strategies.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🛡️</div>
-                <h3>Comprehensive Protection</h3>
-                <p>Guard against fire damage, theft, natural disasters, structural issues, and other unforeseen events with our extensive coverage options.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">⚡</div>
-                <h3>Lightning-Fast Claims</h3>
-                <p>Experience rapid and hassle-free claim processing with dedicated support from our team of Islamic insurance specialists and adjusters.</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">📞</div>
-                <h3>Premium Support</h3>
-                <p>Access round-the-clock customer support available in multiple languages including Arabic, English, and Urdu to assist with all your insurance needs.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="why-choose" id="why-choose">
-        <div class="why-choose-content">
-            <div class="benefits-content slide-in-left">
-                <h2>The Takaful Advantage</h2>
-                <p>Discover what sets us apart in the world of Islamic insurance. Our commitment to authentic Islamic principles combined with modern insurance expertise creates unparalleled value.</p>
-                <ul class="benefits-list">
-                    <li>Zero interest-based transactions (Riba-free)</li>
-                    <li>Equitable profit sharing with participants</li>
-                    <li>Ethical investment of pooled funds</li>
-                    <li>Independent Shariah board oversight</li>
-                    <li>Community-centered approach to coverage</li>
-                    <li>Integrated charitable giving (Zakat) options</li>
-                    <li>Transparent fee structure and operations</li>
-                    <li>Halal investment portfolio management</li>
-                </ul>
-            </div>
-            <div class="islamic-values slide-in-right">
-                <h2>Islamic Values at Our Foundation</h2>
-                <p>Every aspect of our service is guided by authentic Islamic principles that have guided Muslims for over 1400 years.</p>
-                <div class="value-cards">
-                    <div class="value-card">
-                        <div class="icon">🕌</div>
-                        <h4>Tawhid</h4>
-                        <p>Unity of purpose in serving Allah and protecting our community</p>
-                    </div>
-                    <div class="value-card">
-                        <div class="icon">⚖️</div>
-                        <h4>Adl</h4>
-                        <p>Justice and fairness in all our dealings and claim settlements</p>
-                    </div>
-                    <div class="value-card">
-                        <div class="icon">🤲</div>
-                        <h4>Ta'awun</h4>
-                        <p>Mutual assistance and cooperation among community members</p>
-                    </div>
-                    <div class="value-card">
-                        <div class="icon">💝</div>
-                        <h4>Ihsan</h4>
-                        <p>Excellence and beauty in service delivery and customer care</p>
-                    </div>
+            <div class="portal-card" onclick="openPortal('underwriter')">
+                <div class="portal-icon">🎯</div>
+                <h3>Underwriter Workbench</h3>
+                <p>Configure premium rules, risk models, and underwriting guidelines at state level.</p>
+                <div class="permissions-preview">
+                    <h4>Configuration Access:</h4>
+                    <ul class="permissions-list">
+                        <li>Set premium base rates</li>
+                        <li>Configure risk models</li>
+                        <li>Define underwriting rules</li>
+                        <li>Manage state regulations</li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="testimonials" id="testimonials">
-        <div class="testimonials-container">
-            <h2 class="fade-in">What Our Community Says</h2>
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-text">
-                    "Finally, an insurance company that truly understands our Islamic values. When our home was damaged in a storm, Takaful handled everything with such care and speed. The entire process was transparent and completely halal. Alhamdulillah!"
+    <!-- Agent Portal -->
+    <div class="main-portal" id="agentPortal">
+        <div class="header">
+            <h1>Agent Configuration Portal</h1>
+            <div class="user-info">
+                <button class="notification-btn" onclick="toggleNotifications()">
+                    🔔
+                    <span class="notification-badge">3</span>
+                </button>
+                <button class="back-btn" onclick="showPortalSelector()">← Back to Home</button>
+            </div>
+        </div>
+        
+        <div class="portal-layout">
+            <div class="sidebar">
+                <div class="nav-section">
+                    <h3>Quote Configuration</h3>
+                    <div class="nav-item active" onclick="showSection('agent', 'riskFactors')">
+                        <span class="nav-icon">⚡</span>
+                        Risk Factor Weights
+                    </div>
+                    <div class="nav-item" onclick="showSection('agent', 'securityFeatures')">
+                        <span class="nav-icon">🛡️</span>
+                        Security Features
+                    </div>
+                    <div class="nav-item" onclick="showSection('agent', 'customFactors')">
+                        <span class="nav-icon">➕</span>
+                        Custom Risk Factors
+                    </div>
                 </div>
-                <div class="testimonial-author">— Fatima Al-Zahra, Satisfied Customer</div>
-            </div>
-        </div>
-    </section>
+                
+                <div class="nav-section">
+                    <h3>Client Management</h3>
+                    <div class="nav-item" onclick="showSection('agent', 'documentExceptions')">
+                        <span class="nav-icon">📋</span>
+                        Document Exceptions
+                    </div>
+                    <div class="nav-item" onclick="showSection('agent', 'quoteHistory')">
+                        <span class="nav-icon">📊</span>
+                        Quote History
+                    </div>
+                </div>
 
-    <section class="final-cta" id="quote">
-        <h2>Ready to Protect Your Home the Halal Way?</h2>
-        <p>Join over 50,000 Muslim families who trust Takaful for their home insurance needs. Get a personalized quote in minutes and experience insurance that aligns with your faith.</p>
-        <div class="cta-buttons">
-            <a href="#" class="cta-button cta-white">Get Your Free Quote Now</a>
-            <a href="#" class="cta-button cta-secondary">Speak with an Expert</a>
-        </div>
-    </section>
+                <div class="nav-section">
+                    <h3>System</h3>
+                    <div class="nav-item" onclick="showSection('agent', 'notifications')">
+                        <span class="nav-icon">🔔</span>
+                        Notifications
+                    </div>
+                </div>
+            </div>
 
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Takaful Insurance</h4>
-                <p>Leading provider of Shariah-compliant home insurance solutions, serving the Muslim community with integrity, transparency, and authentic Islamic values since 2010.</p>
-                <br>
-                <p><strong>Licensed & Regulated by:</strong><br>
-                Islamic Financial Services Board (IFSB)<br>
-                National Insurance Commission</p>
-            </div>
-            <div class="footer-section">
-                <h4>Our Services</h4>
-                <a href="#">Home Insurance Coverage</a><br>
-                <a href="#">Rapid Claims Processing</a><br>
-                <a href="#">Islamic Investment Options</a><br>
-                <a href="#">24/7 Customer Support</a><br>
-                <a href="#">Shariah Advisory Services</a><br>
-                <a href="#">Community Outreach Programs</a>
-            </div>
-            <div class="footer-section">
-                <h4>Get in Touch</h4>
-                <p>📧 salam@takaful-home.com</p>
-                <p>📞 1-800-TAKAFUL (825-2385)</p>
-                <p>💬 Live Chat Available 24/7</p>
-                <p>📍 123 Islamic Finance Boulevard<br>&nbsp;&nbsp;&nbsp;&nbsp;Suite 456, Muslim Quarter<br>&nbsp;&nbsp;&nbsp;&nbsp;Your City, State 12345</p>
-            </div>
-            <div class="footer-section">
-                <h4>Islamic Certifications</h4>
-                <p>✓ AAOIFI Standards Compliant</p>
-                <p>✓ Independent Shariah Board Certified</p>
-                <p>✓ Islamic Finance Foundation Member</p>
-                <p>✓ Halal Investment Portfolio</p>
-                <br>
-                <p><strong>Prayer Times Support:</strong><br>
-                Customer service respects Islamic prayer times</p>
+            <div class="main-content">
+                <div class="content-section active" id="agent-riskFactors">
+                    <div class="section-header">
+                        <h2>Risk Factor Weight Configuration</h2>
+                        <p>Adjust risk factor weights for specific client quotes. Changes require manager approval.</p>
+                    </div>
+
+                    <div class="config-grid">
+                        <div class="config-card">
+                            <h3>Property Characteristics <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Age of Property Weight</label>
+                                    <input type="number" value="1.25" step="0.01" min="0.5" max="3.0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Square Footage Weight</label>
+                                    <input type="number" value="1.15" step="0.01" min="0.5" max="3.0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Construction Material Weight</label>
+                                    <input type="number" value="1.40" step="0.01" min="0.5" max="3.0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Roof Type Weight</label>
+                                    <input type="number" value="1.35" step="0.01" min="0.5" max="3.0">
+                                </div>
+                            </div>
+                            <button class="btn" style="margin-top: 1rem;">Request Weight Changes</button>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Location Factors <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Fire Protection Class Weight</label>
+                                    <input type="number" value="1.20" step="0.01" min="0.5" max="3.0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Flood Zone Weight</label>
+                                    <input type="number" value="2.15" step="0.01" min="0.5" max="5.0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Crime Rate Weight</label>
+                                    <input type="number" value="1.30" step="0.01" min="0.5" max="3.0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Distance to Coast Weight</label>
+                                    <input type="number" value="1.80" step="0.01" min="0.5" max="4.0">
+                                </div>
+                            </div>
+                            <button class="btn" style="margin-top: 1rem;">Submit for Approval</button>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Base Premium Rules <span class="permission-badge read-only">Read Only</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Base Premium Rate</label>
+                                    <input type="number" value="850.00" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Minimum Premium</label>
+                                    <input type="number" value="500.00" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Maximum Premium</label>
+                                    <input type="number" value="15000.00" disabled>
+                                </div>
+                            </div>
+                            <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.9rem;">
+                                Contact underwriter to modify base premium rules.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin: 2rem 0 1rem 0; color: var(--deep-navy);">Current Risk Model Formula</h3>
+                    <div style="background: var(--light-blue); padding: 2rem; border-radius: 15px; font-family: monospace; font-size: 1.1rem; text-align: center; color: var(--deep-navy);">
+                        Final Premium = Base Premium + Σ(Risk Factors × Weights) - Σ(Security Features × Weights)
+                    </div>
+                </div>
+
+                <div class="content-section" id="agent-securityFeatures">
+                    <div class="section-header">
+                        <h2>Security Feature Configuration</h2>
+                        <p>Configure security feature weights that reduce risk and premium costs.</p>
+                    </div>
+
+                    <div class="config-grid">
+                        <div class="config-card">
+                            <h3>Security Systems <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Monitored Alarm Weight</label>
+                                    <input type="number" value="-0.15" step="0.01" min="-0.5" max="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Security Cameras Weight</label>
+                                    <input type="number" value="-0.10" step="0.01" min="-0.3" max="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Smart Door Locks Weight</label>
+                                    <input type="number" value="-0.05" step="0.01" min="-0.2" max="0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Fire Safety <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Sprinkler System Weight</label>
+                                    <input type="number" value="-0.25" step="0.01" min="-0.5" max="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Smoke Detectors Weight</label>
+                                    <input type="number" value="-0.08" step="0.01" min="-0.2" max="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Fire Extinguishers Weight</label>
+                                    <input type="number" value="-0.03" step="0.01" min="-0.1" max="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn">Save Security Feature Weights</button>
+                </div>
+
+                <div class="content-section" id="agent-customFactors">
+                    <div class="section-header">
+                        <h2>Custom Risk Factors</h2>
+                        <p>Add client-specific risk factors for unique property characteristics.</p>
+                    </div>
+
+                    <div class="config-card">
+                        <h3>Add New Risk Factor</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Factor Name</label>
+                                <input type="text" placeholder="e.g., Pool with No Fence">
+                            </div>
+                            <div class="form-group">
+                                <label>Factor Weight</label>
+                                <input type="number" placeholder="1.15" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select>
+                                    <option>Property Characteristics</option>
+                                    <option>Location</option>
+                                    <option>Security Features</option>
+                                    <option>Claims History</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Justification</label>
+                                <textarea placeholder="Explain why this factor affects risk..."></textarea>
+                            </div>
+                        </div>
+                        <button class="btn">Submit Custom Factor</button>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Factor Name</th>
+                                <th>Weight</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pool without Safety Fence</td>
+                                <td>+1.25</td>
+                                <td>Property Characteristics</td>
+                                <td class="status-active">Approved</td>
+                                <td><button class="btn btn-secondary">Edit</button></td>
+                            </tr>
+                            <tr>
+                                <td>Home Business Operation</td>
+                                <td>+1.15</td>
+                                <td>Property Characteristics</td>
+                                <td class="status-pending">Pending</td>
+                                <td><button class="btn btn-secondary">View</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="content-section" id="agent-documentExceptions">
+                    <div class="section-header">
+                        <h2>Document Requirement Exceptions</h2>
+                        <p>Request exceptions for mandatory document requirements for specific clients.</p>
+                    </div>
+
+                    <div class="config-card">
+                        <h3>Request Document Exception</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Client Name</label>
+                                <input type="text" placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label>Property Address</label>
+                                <input type="text" placeholder="123 Main St, City, State">
+                            </div>
+                            <div class="form-group">
+                                <label>Document Type</label>
+                                <select>
+                                    <option>Property Inspection Report</option>
+                                    <option>Insurance History</option>
+                                    <option>Credit Report</option>
+                                    <option>Proof of Ownership</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Exception Reason</label>
+                                <textarea placeholder="Explain why exception is needed..."></textarea>
+                            </div>
+                        </div>
+                        <button class="btn">Submit Exception Request</button>
+                    </div>
+                </div>
+
+                <div class="content-section" id="agent-quoteHistory">
+                    <div class="section-header">
+                        <h2>Quote Configuration History</h2>
+                        <p>Track all configuration changes and their approval status.</p>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Configuration Type</th>
+                                <th>Change Description</th>
+                                <th>Status</th>
+                                <th>Approved By</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2025-01-15</td>
+                                <td>Risk Factor Weight</td>
+                                <td>Increased flood zone weight to 2.15</td>
+                                <td class="status-active">Approved</td>
+                                <td>Manager Smith</td>
+                            </tr>
+                            <tr>
+                                <td>2025-01-14</td>
+                                <td>Custom Risk Factor</td>
+                                <td>Added "Pool without Safety Fence" factor</td>
+                                <td class="status-active">Approved</td>
+                                <td>Manager Johnson</td>
+                            </tr>
+                            <tr>
+                                <td>2025-01-13</td>
+                                <td>Security Feature Weight</td>
+                                <td>Modified sprinkler system discount</td>
+                                <td class="status-pending">Pending</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="content-section" id="agent-notifications">
+                    <div class="section-header">
+                        <h2>Notifications</h2>
+                        <p>Stay updated on configuration approvals and system changes.</p>
+                    </div>
+
+                    <div class="notification-item success">
+                        <h4>Configuration Approved</h4>
+                        <p>Your request to modify flood zone weight has been approved by Manager Smith.</p>
+                        <div class="notification-time">2 hours ago</div>
+                    </div>
+
+                    <div class="notification-item warning">
+                        <h4>Pending Review</h4>
+                        <p>Custom risk factor "Home Business Operation" is awaiting manager approval.</p>
+                        <div class="notification-time">1 day ago</div>
+                    </div>
+
+                    <div class="notification-item">
+                        <h4>System Update</h4>
+                        <p>New security feature weights have been deployed across all states.</p>
+                        <div class="notification-time">3 days ago</div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Takaful Islamic Insurance. All rights reserved. | Protecting Muslim Families with Faith-Based Insurance Solutions | <a href="#" style="color: var(--primary-gold);">Privacy Policy</a> | <a href="#" style="color: var(--primary-gold);">Shariah Compliance</a></p>
-            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
-                Powered by <a href="https://dataorbitllc.com" target="_blank" style="color: var(--primary-gold); text-decoration: none; font-weight: 500; transition: all 0.3s ease;" onmouseover="this.style.opacity='1'; this.style.textDecoration='underline';" onmouseout="this.style.opacity='0.8'; this.style.textDecoration='none';">DataOrbit</a>
-            </p>
+    </div>
+
+    <!-- Account Manager Portal -->
+    <div class="main-portal" id="accountManagerPortal">
+        <div class="header">
+            <h1>Account Manager Portal</h1>
+            <div class="user-info">
+                <button class="notification-btn" onclick="toggleNotifications()">
+                    🔔
+                    <span class="notification-badge">7</span>
+                </button>
+                <button class="back-btn" onclick="showPortalSelector()">← Back to Home</button>
+            </div>
         </div>
-    </footer>
+        
+        <div class="portal-layout">
+            <div class="sidebar">
+                <div class="nav-section">
+                    <h3>Approval Management</h3>
+                    <div class="nav-item active" onclick="showSection('accountManager', 'pendingApprovals')">
+                        <span class="nav-icon">⏳</span>
+                        Pending Approvals
+                    </div>
+                    <div class="nav-item" onclick="showSection('accountManager', 'ruleChangeHistory')">
+                        <span class="nav-icon">📋</span>
+                        Rule Change History
+                    </div>
+                </div>
+                
+                <div class="nav-section">
+                    <h3>Global Configuration</h3>
+                    <div class="nav-item" onclick="showSection('accountManager', 'globalTaxRates')">
+                        <span class="nav-icon">💰</span>
+                        Global Tax Rates
+                    </div>
+                    <div class="nav-item" onclick="showSection('accountManager', 'stateOverrides')">
+                        <span class="nav-icon">🗺️</span>
+                        State Overrides
+                    </div>
+                    <div class="nav-item" onclick="showSection('accountManager', 'systemSettings')">
+                        <span class="nav-icon">⚙️</span>
+                        System Settings
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <h3>Compliance</h3>
+                    <div class="nav-item" onclick="showSection('accountManager', 'auditTrail')">
+                        <span class="nav-icon">🔍</span>
+                        Audit Trail
+                    </div>
+                    <div class="nav-item" onclick="showSection('accountManager', 'notifications')">
+                        <span class="nav-icon">🔔</span>
+                        Notifications
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="content-section active" id="accountManager-pendingApprovals">
+                    <div class="section-header">
+                        <h2>Pending Rule Change Approvals</h2>
+                        <p>Review and approve configuration changes requested by agents and underwriters.</p>
+                    </div>
+
+                    <div class="config-grid">
+                        <div class="config-card">
+                            <h3>Risk Factor Weight Change <span class="permission-badge warning">Pending</span></h3>
+                            <p><strong>Requested by:</strong> Agent Martinez</p>
+                            <p><strong>Property:</strong> 456 Ocean View Dr, Miami, FL</p>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Current Hurricane Risk Weight</label>
+                                    <input type="number" value="3.25" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Proposed Hurricane Risk Weight</label>
+                                    <input type="number" value="2.85" disabled>
+                                </div>
+                            </div>
+                            <p><strong>Justification:</strong> Property has new hurricane shutters and impact windows installed.</p>
+                            <div style="margin-top: 1rem; gap: 1rem; display: flex;">
+                                <button class="btn">Approve</button>
+                                <button class="btn btn-danger">Reject</button>
+                            </div>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Custom Risk Factor Addition <span class="permission-badge warning">Pending</span></h3>
+                            <p><strong>Requested by:</strong> Agent Thompson</p>
+                            <p><strong>Factor Name:</strong> Home Business Operation</p>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Proposed Weight</label>
+                                    <input type="number" value="1.15" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <input type="text" value="Property Characteristics" disabled>
+                                </div>
+                            </div>
+                            <p><strong>Justification:</strong> Client runs consulting business from home, increasing liability risk.</p>
+                            <div style="margin-top: 1rem; gap: 1rem; display: flex;">
+                                <button class="btn">Approve</button>
+                                <button class="btn btn-danger">Reject</button>
+                            </div>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Document Exception Request <span class="permission-badge warning">Pending</span></h3>
+                            <p><strong>Requested by:</strong> Agent Davis</p>
+                            <p><strong>Client:</strong> Sarah Wilson</p>
+                            <p><strong>Exception:</strong> Property Inspection Report</p>
+                            <p><strong>Reason:</strong> Property recently inspected by city, report available but different format.</p>
+                            <div style="margin-top: 1rem; gap: 1rem; display: flex;">
+                                <button class="btn">Approve</button>
+                                <button class="btn btn-danger">Reject</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section" id="accountManager-ruleChangeHistory">
+                    <div class="section-header">
+                        <h2>Rule Change History</h2>
+                        <p>Complete audit trail of all approved and rejected rule changes.</p>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Requested By</th>
+                                <th>Change Type</th>
+                                <th>Description</th>
+                                <th>Decision</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2025-01-15</td>
+                                <td>Agent Martinez</td>
+                                <td>Risk Weight</td>
+                                <td>Modified flood zone weight</td>
+                                <td class="status-active">Approved</td>
+                                <td><button class="btn btn-secondary">View Details</button></td>
+                            </tr>
+                            <tr>
+                                <td>2025-01-14</td>
+                                <td>Underwriter Brown</td>
+                                <td>Premium Rule</td>
+                                <td>Updated base premium for CA</td>
+                                <td class="status-active">Approved</td>
+                                <td><button class="btn btn-secondary">View Details</button></td>
+                            </tr>
+                            <tr>
+                                <td>2025-01-13</td>
+                                <td>Agent Johnson</td>
+                                <td>Custom Factor</td>
+                                <td>Added "Trampoline" risk factor</td>
+                                <td style="color: var(--danger);">Rejected</td>
+                                <td><button class="btn btn-secondary">View Details</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="content-section" id="accountManager-globalTaxRates">
+                    <div class="section-header">
+                        <h2>Global Tax Rate Management</h2>
+                        <p>Configure federal tax rates and fees that apply across all states.</p>
+                    </div>
+
+                    <div class="config-grid">
+                        <div class="config-card">
+                            <h3>Federal Tax Rates <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Federal Excise Tax Rate (%)</label>
+                                    <input type="number" value="4.00" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>NAIC Fee ($)</label>
+                                    <input type="number" value="2.50" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Federal Processing Fee ($)</label>
+                                    <input type="number" value="5.00" step="0.01">
+                                </div>
+                            </div>
+                            <button class="btn">Update Federal Rates</button>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Multi-State Coordination <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Interstate Policy Fee ($)</label>
+                                    <input type="number" value="15.00" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Cross-Border Transaction Fee ($)</label>
+                                    <input type="number" value="3.00" step="0.01">
+                                </div>
+                            </div>
+                            <button class="btn">Update Coordination Fees</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section" id="accountManager-stateOverrides">
+                    <div class="section-header">
+                        <h2>State-Level Overrides</h2>
+                        <p>Override state-specific rules when regulatory changes occur.</p>
+                    </div>
+
+                    <div class="config-card">
+                        <h3>Emergency State Override</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>State</label>
+                                <select>
+                                    <option>California</option>
+                                    <option>Florida</option>
+                                    <option>Texas</option>
+                                    <option>New York</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Override Type</label>
+                                <select>
+                                    <option>Wildfire Emergency</option>
+                                    <option>Hurricane Emergency</option>
+                                    <option>Regulatory Change</option>
+                                    <option>Market Conditions</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Override Duration (Days)</label>
+                                <input type="number" value="30">
+                            </div>
+                            <div class="form-group">
+                                <label>Justification</label>
+                                <textarea placeholder="Explain emergency override reason..."></textarea>
+                            </div>
+                        </div>
+                        <button class="btn btn-danger">Activate Emergency Override</button>
+                    </div>
+                </div>
+
+                <div class="content-section" id="accountManager-systemSettings">
+                    <div class="section-header">
+                        <h2>System Configuration Settings</h2>
+                        <p>Manage global system parameters and operational settings.</p>
+                    </div>
+
+                    <div class="config-grid">
+                        <div class="config-card">
+                            <h3>Quote Validity Settings <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Quote Expiration (Days)</label>
+                                    <input type="number" value="30">
+                                </div>
+                                <div class="form-group">
+                                    <label>Price Lock Period (Days)</label>
+                                    <input type="number" value="15">
+                                </div>
+                                <div class="form-group">
+                                    <label>Auto-Renewal Notice (Days)</label>
+                                    <input type="number" value="45">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Approval Thresholds <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Auto-Approve Weight Changes (%)</label>
+                                    <input type="number" value="5.0" step="0.1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Manager Review Threshold (%)</label>
+                                    <input type="number" value="15.0" step="0.1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Executive Approval Threshold (%)</label>
+                                    <input type="number" value="25.0" step="0.1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn">Save System Settings</button>
+                </div>
+
+                <div class="content-section" id="accountManager-auditTrail">
+                    <div class="section-header">
+                        <h2>Audit Trail</h2>
+                        <p>Complete regulatory compliance audit trail for all system changes.</p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem; display: flex; gap: 1rem; align-items: center;">
+                        <input type="date" placeholder="Start Date" style="padding: 0.8rem; border: 2px solid var(--cream); border-radius: 8px;">
+                        <input type="date" placeholder="End Date" style="padding: 0.8rem; border: 2px solid var(--cream); border-radius: 8px;">
+                        <select style="padding: 0.8rem; border: 2px solid var(--cream); border-radius: 8px;">
+                            <option>All Users</option>
+                            <option>Agents</option>
+                            <option>Underwriters</option>
+                            <option>Managers</option>
+                        </select>
+                        <button class="btn">Generate Report</button>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Table/Field</th>
+                                <th>Old Value</th>
+                                <th>New Value</th>
+                                <th>IP Address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2025-01-15 14:32:11</td>
+                                <td>Agent Martinez</td>
+                                <td>UPDATE</td>
+                                <td>risk_factors.weight</td>
+                                <td>3.25</td>
+                                <td>2.85</td>
+                                <td>192.168.1.45</td>
+                            </tr>
+                            <tr>
+                                <td>2025-01-15 13:28:05</td>
+                                <td>Manager Smith</td>
+                                <td>APPROVE</td>
+                                <td>rule_change_requests</td>
+                                <td>PENDING</td>
+                                <td>APPROVED</td>
+                                <td>192.168.1.12</td>
+                            </tr>
+                            <tr>
+                                <td>2025-01-14 16:45:22</td>
+                                <td>Underwriter Brown</td>
+                                <td>CREATE</td>
+                                <td>premium_rules</td>
+                                <td>NULL</td>
+                                <td>CA_BASE_950</td>
+                                <td>192.168.1.78</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="content-section" id="accountManager-notifications">
+                    <div class="section-header">
+                        <h2>Notifications</h2>
+                        <p>Critical system alerts and approval requests.</p>
+                    </div>
+
+                    <div class="notification-item warning">
+                        <h4>Urgent Approval Required</h4>
+                        <p>Emergency override request for Florida hurricane emergency procedures.</p>
+                        <div class="notification-time">15 minutes ago</div>
+                    </div>
+
+                    <div class="notification-item">
+                        <h4>New Rule Change Request</h4>
+                        <p>Agent Martinez requesting risk factor weight modification for hurricane zone property.</p>
+                        <div class="notification-time">1 hour ago</div>
+                    </div>
+
+                    <div class="notification-item success">
+                        <h4>System Update Complete</h4>
+                        <p>Global tax rate updates have been successfully deployed to production.</p>
+                        <div class="notification-time">3 hours ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Underwriter Portal -->
+    <div class="main-portal" id="underwriterPortal">
+        <div class="header">
+            <h1>Underwriter Workbench</h1>
+            <div class="user-info">
+                <button class="notification-btn" onclick="toggleNotifications()">
+                    🔔
+                    <span class="notification-badge">5</span>
+                </button>
+                <button class="back-btn" onclick="showPortalSelector()">← Back to Home</button>
+            </div>
+        </div>
+        
+        <div class="portal-layout">
+            <div class="sidebar">
+                <div class="nav-section">
+                    <h3>Premium Configuration</h3>
+                    <div class="nav-item active" onclick="showSection('underwriter', 'basePremiumRules')">
+                        <span class="nav-icon">💰</span>
+                        Base Premium Rules
+                    </div>
+                    <div class="nav-item" onclick="showSection('underwriter', 'riskModelConfig')">
+                        <span class="nav-icon">📊</span>
+                        Risk Model Configuration
+                    </div>
+                    <div class="nav-item" onclick="showSection('underwriter', 'stateTaxRates')">
+                        <span class="nav-icon">🏛️</span>
+                        State Tax Rates
+                    </div>
+                </div>
+                
+                <div class="nav-section">
+                    <h3>Underwriting Rules</h3>
+                    <div class="nav-item" onclick="showSection('underwriter', 'underwritingGuidelines')">
+                        <span class="nav-icon">📋</span>
+                        Underwriting Guidelines
+                    </div>
+                    <div class="nav-item" onclick="showSection('underwriter', 'documentRequirements')">
+                        <span class="nav-icon">📄</span>
+                        Document Requirements
+                    </div>
+                    <div class="nav-item" onclick="showSection('underwriter', 'stateRegulations')">
+                        <span class="nav-icon">⚖️</span>
+                        State Regulations
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <h3>Analytics</h3>
+                    <div class="nav-item" onclick="showSection('underwriter', 'riskAnalytics')">
+                        <span class="nav-icon">📈</span>
+                        Risk Analytics
+                    </div>
+                    <div class="nav-item" onclick="showSection('underwriter', 'notifications')">
+                        <span class="nav-icon">🔔</span>
+                        Notifications
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="content-section active" id="underwriter-basePremiumRules">
+                    <div class="section-header">
+                        <h2>Base Premium Rules Configuration</h2>
+                        <p>Set state-specific base premium rates and calculation parameters.</p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <label for="stateSelector" style="font-weight: 600; margin-right: 1rem;">Select State:</label>
+                        <select id="stateSelector" style="padding: 0.8rem; border: 2px solid var(--cream); border-radius: 8px; margin-right: 1rem;">
+                            <option>California</option>
+                            <option>Florida</option>
+                            <option>Texas</option>
+                            <option>New York</option>
+                        </select>
+                        <button class="btn btn-secondary">Load State Rules</button>
+                    </div>
+
+                    <div class="config-grid">
+                        <div class="config-card">
+                            <h3>California Base Premium <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Base Premium Rate ($)</label>
+                                    <input type="number" value="950.00" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Minimum Premium ($)</label>
+                                    <input type="number" value="600.00" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Maximum Premium ($)</label>
+                                    <input type="number" value="25000.00" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Dwelling Rate (per $1000)</label>
+                                    <input type="number" value="0.85" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Personal Property Rate</label>
+                                    <input type="number" value="0.45" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Liability Rate</label>
+                                    <input type="number" value="0.25" step="0.01">
+                                </div>
+                            </div>
+                            <button class="btn">Request Premium Rate Changes</button>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Wildfire Risk Adjustments <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>High Fire Risk Zone Multiplier</label>
+                                    <input type="number" value="2.45" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Moderate Fire Risk Multiplier</label>
+                                    <input type="number" value="1.65" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Fire-Resistant Materials Discount</label>
+                                    <input type="number" value="-0.15" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Defensible Space Discount</label>
+                                    <input type="number" value="-0.12" step="0.01">
+                                </div>
+                            </div>
+                            <button class="btn">Update Wildfire Rules</button>
+                        </div>
+                    </div>
+
+                    <h3 style="margin: 2rem 0 1rem 0; color: var(--deep-navy);">Premium Calculation Formula</h3>
+                    <div style="background: var(--light-blue); padding: 2rem; border-radius: 15px; font-family: monospace; font-size: 1.1rem; color: var(--deep-navy);">
+                        <div style="text-align: center; margin-bottom: 1rem; font-weight: bold;">
+                            Final Premium = Base Premium + Σ(Risk Factors × Weights) - Σ(Security Features × Weights) + State Taxes + Fees
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; font-size: 0.9rem;">
+                            <div>Base Premium: $950.00</div>
+                            <div>Risk Multipliers: Applied by category</div>
+                            <div>Security Discounts: Subtracted from total</div>
+                            <div>State Tax: 2.25%</div>
+                            <div>Processing Fees: $15.00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section" id="underwriter-riskModelConfig">
+                    <div class="section-header">
+                        <h2>Risk Model Configuration</h2>
+                        <p>Configure state-specific risk factors and their weights for premium calculation.</p>
+                    </div>
+
+                    <div class="config-grid">
+                        <div class="config-card">
+                            <h3>Property Risk Factors <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Property Age Weight</label>
+                                    <input type="number" value="1.25" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Square Footage Weight</label>
+                                    <input type="number" value="1.15" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Construction Material Weight</label>
+                                    <input type="number" value="1.40" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Roof Type Weight</label>
+                                    <input type="number" value="1.35" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Foundation Type Weight</label>
+                                    <input type="number" value="1.20" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Stories Count Weight</label>
+                                    <input type="number" value="1.10" step="0.01">
+                                </div>
+                            </div>
+                            <button class="btn">Update Property Factors</button>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Location Risk Factors <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Fire Protection Class Weight</label>
+                                    <input type="number" value="1.30" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Flood Zone Weight</label>
+                                    <input type="number" value="2.85" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Crime Rate Weight</label>
+                                    <input type="number" value="1.45" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Distance to Coast Weight</label>
+                                    <input type="number" value="2.20" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Earthquake Zone Weight</label>
+                                    <input type="number" value="1.95" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Wildfire Risk Weight</label>
+                                    <input type="number" value="3.45" step="0.01">
+                                </div>
+                            </div>
+                            <button class="btn">Update Location Factors</button>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Add New Risk Factor</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Factor Name</label>
+                                    <input type="text" placeholder="e.g., Solar Panel Installation">
+                                </div>
+                                <div class="form-group">
+                                    <label>Factor Category</label>
+                                    <select>
+                                        <option>Property Characteristics</option>
+                                        <option>Location</option>
+                                        <option>Natural Disasters</option>
+                                        <option>Security Features</option>
+                                        <option>Claims History</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Default Weight</label>
+                                    <input type="number" placeholder="1.00" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Data Type</label>
+                                    <select>
+                                        <option>Boolean</option>
+                                        <option>Numeric</option>
+                                        <option>Categorical</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Applies to States</label>
+                                    <select multiple>
+                                        <option>CA</option>
+                                        <option>FL</option>
+                                        <option>TX</option>
+                                        <option>NY</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea placeholder="Describe how this factor affects risk..."></textarea>
+                                </div>
+                            </div>
+                            <button class="btn">Submit New Risk Factor</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section" id="underwriter-stateTaxRates">
+                    <div class="section-header">
+                        <h2>State Tax Rates Configuration</h2>
+                        <p>Manage state-specific tax rates, fees, and special assessments.</p>
+                    </div>
+
+                    <div class="config-grid">
+                        <div class="config-card">
+                            <h3>California Tax Configuration <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>State Premium Tax Rate (%)</label>
+                                    <input type="number" value="2.25" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>State Fee ($)</label>
+                                    <input type="number" value="12.00" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>FAIR Plan Assessment (%)</label>
+                                    <input type="number" value="0.15" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Wildfire Fund Assessment (%)</label>
+                                    <input type="number" value="0.25" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Inspection Fee ($)</label>
+                                    <input type="number" value="25.00" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Earthquake Authority Fee ($)</label>
+                                    <input type="number" value="5.00" step="0.01">
+                                </div>
+                            </div>
+                            <button class="btn">Update CA Tax Rates</button>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Florida Tax Configuration <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>State Premium Tax Rate (%)</label>
+                                    <input type="number" value="1.75" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Hurricane Catastrophe Fund (%)</label>
+                                    <input type="number" value="1.30" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Citizens Assessment (%)</label>
+                                    <input type="number" value="0.85" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Emergency Management Fee ($)</label>
+                                    <input type="number" value="2.00" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Windstorm Inspection Fee ($)</label>
+                                    <input type="number" value="50.00" step="0.01">
+                                </div>
+                            </div>
+                            <button class="btn">Update FL Tax Rates</button>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Texas Tax Configuration <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>State Premium Tax Rate (%)</label>
+                                    <input type="number" value="1.60" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>TWIA Assessment (%)</label>
+                                    <input type="number" value="0.95" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Catastrophe Reserve Fund (%)</label>
+                                    <input type="number" value="0.50" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Hail Damage Assessment (%)</label>
+                                    <input type="number" value="0.25" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>State Filing Fee ($)</label>
+                                    <input type="number" value="15.00" step="0.01">
+                                </div>
+                            </div>
+                            <button class="btn">Update TX Tax Rates</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section" id="underwriter-underwritingGuidelines">
+                    <div class="section-header">
+                        <h2>Underwriting Guidelines Configuration</h2>
+                        <p>Set automated underwriting rules and manual review triggers.</p>
+                    </div>
+
+                    <div class="config-grid">
+                        <div class="config-card">
+                            <h3>Auto-Approval Rules <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Max Auto-Approve Premium ($)</label>
+                                    <input type="number" value="5000.00" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Max Dwelling Value ($)</label>
+                                    <input type="number" value="750000.00" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Max Risk Score</label>
+                                    <input type="number" value="7.5" step="0.1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Min Credit Score</label>
+                                    <input type="number" value="650" step="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Max Claims (5 years)</label>
+                                    <input type="number" value="2" step="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Property Age Limit (years)</label>
+                                    <input type="number" value="50" step="1">
+                                </div>
+                            </div>
+                            <button class="btn">Update Auto-Approval Rules</button>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Referral Triggers <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>High-Risk Zone Properties</label>
+                                    <select>
+                                        <option>Always Refer</option>
+                                        <option>Auto-Approve with Conditions</option>
+                                        <option>Standard Processing</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Properties with Pool</label>
+                                    <select>
+                                        <option>Standard Processing</option>
+                                        <option>Require Safety Features</option>
+                                        <option>Always Refer</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Home Business Operations</label>
+                                    <select>
+                                        <option>Always Refer</option>
+                                        <option>Require Business License</option>
+                                        <option>Standard Processing</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Previous Claim Frequency</label>
+                                    <select>
+                                        <option>3+ Claims: Always Refer</option>
+                                        <option>2+ Claims: Always Refer</option>
+                                        <option>4+ Claims: Always Refer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn">Update Referral Rules</button>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Decline Rules <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Max Acceptable Risk Score</label>
+                                    <input type="number" value="9.0" step="0.1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Min Acceptable Credit Score</label>
+                                    <input type="number" value="500" step="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Property Condition Requirements</label>
+                                    <select>
+                                        <option>Good Condition or Better</option>
+                                        <option>Fair Condition or Better</option>
+                                        <option>Accept All Conditions</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Unoccupied Property Policy</label>
+                                    <select>
+                                        <option>Decline All</option>
+                                        <option>Refer for Review</option>
+                                        <option>Accept with Conditions</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn">Update Decline Rules</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section" id="underwriter-documentRequirements">
+                    <div class="section-header">
+                        <h2>Document Requirements Configuration</h2>
+                        <p>Configure mandatory documents based on property value, location, and risk factors.</p>
+                    </div>
+
+                    <div class="config-grid">
+                        <div class="config-card">
+                            <h3>Standard Document Requirements <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Property Inspection Required Above ($)</label>
+                                    <input type="number" value="500000.00" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Insurance History Required</label>
+                                    <select>
+                                        <option>Always Required</option>
+                                        <option>Required if Claims History</option>
+                                        <option>Optional</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Credit Report Required</label>
+                                    <select>
+                                        <option>Always Required</option>
+                                        <option>Required for High Risk</option>
+                                        <option>Optional</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Proof of Ownership Required</label>
+                                    <select>
+                                        <option>Always Required</option>
+                                        <option>Required for New Purchases</option>
+                                        <option>Optional</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn">Update Standard Requirements</button>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>High-Risk Area Requirements <span class="permission-badge">Full Access</span></h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Wildfire Zone Documents</label>
+                                    <select multiple>
+                                        <option>Defensible Space Certification</option>
+                                        <option>Fire-Resistant Materials Certificate</option>
+                                        <option>Evacuation Plan</option>
+                                        <option>Fire Department Accessibility Report</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Flood Zone Documents</label>
+                                    <select multiple>
+                                        <option>Elevation Certificate</option>
+                                        <option>Flood Insurance History</option>
+                                        <option>FEMA Flood Map</option>
+                                        <option>Drainage Assessment</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Hurricane Zone Documents</label>
+                                    <select multiple>
+                                        <option>Wind Mitigation Report</option>
+                                        <option>Roof Inspection Report</option>
+                                        <option>Hurricane Shutter Certificate</option>
+                                        <option>Impact Window Certificate</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Earthquake Zone Documents</label>
+                                    <select multiple>
+                                        <option>Seismic Retrofit Certificate</option>
+                                        <option>Foundation Inspection</option>
+                                        <option>Structural Engineering Report</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn">Update High-Risk Requirements</button>
+                        </div>
+                    </div>
+
+                    <h3 style="margin: 2rem 0 1rem 0; color: var(--deep-navy);">Document Requirement Rules</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Document Type</th>
+                                <th>Trigger Condition</th>
+                                <th>States</th>
+                                <th>Mandatory</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Property Inspection</td>
+                                <td>Dwelling Value > $500k</td>
+                                <td>All States</td>
+                                <td class="status-active">Yes</td>
+                                <td><button class="btn btn-secondary">Edit</button></td>
+                            </tr>
+                            <tr>
+                                <td>Wind Mitigation Report</td>
+                                <td>Hurricane Zone</td>
+                                <td>FL, TX, SC, NC</td>
+                                <td class="status-active">Yes</td>
+                                <td><button class="btn btn-secondary">Edit</button></td>
+                            </tr>
+                            <tr>
+                                <td>Defensible Space Cert</td>
+                                <td>High Fire Risk Zone</td>
+                                <td>CA, CO, MT</td>
+                                <td class="status-active">Yes</td>
+                                <td><button class="btn btn-secondary">Edit</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="content-section" id="underwriter-stateRegulations">
+                    <div class="section-header">
+                        <h2>State Regulations Management</h2>
+                        <p>Configure state-specific insurance regulations and compliance requirements.</p>
+                    </div>
+
+                    <div class="config-grid">
+                        <div class="config-card">
+                            <h3>California Wildfire Regulations <span class="permission-badge">Full Access</span></h3>
+                            <p><strong>Regulation 2644.9:</strong> Wildfire Risk Mitigation Requirements</p>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Market Share Requirement (%)</label>
+                                    <input type="number" value="85" step="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Non-Renewal Moratorium (months)</label>
+                                    <input type="number" value="12" step="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Mitigation Discount Rate (%)</label>
+                                    <input type="number" value="15" step="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>FAIR Plan Referral Required</label>
+                                    <select>
+                                        <option>Yes - After 3 Declinations</option>
+                                        <option>Yes - After 2 Declinations</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn">Update CA Wildfire Rules</button>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Florida Hurricane Regulations <span class="permission-badge">Full Access</span></h3>
+                            <p><strong>Florida Statute 627.4025:</strong> Hurricane Deductible Requirements</p>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Mandatory Hurricane Deductible (%)</label>
+                                    <select>
+                                        <option>2% of Dwelling Value</option>
+                                        <option>5% of Dwelling Value</option>
+                                        <option>10% of Dwelling Value</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Wind Mitigation Discount (max %)</label>
+                                    <input type="number" value="42" step="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Citizens Eligibility Required</label>
+                                    <select>
+                                        <option>Yes - Check before Declination</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn">Update FL Hurricane Rules</button>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Texas Windstorm Regulations <span class="permission-badge">Full Access</span></h3>
+                            <p><strong>Texas Insurance Code 2210:</strong> TWIA Requirements</p>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Coastal County TWIA Required</label>
+                                    <select>
+                                        <option>Yes - Seaward of Highway 35</option>
+                                        <option>Yes - All Coastal Counties</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Contractor Deductible Waiver</label>
+                                    <select>
+                                        <option>Prohibited by Law</option>
+                                        <option>Allowed with Disclosure</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Claim Filing Deadline (years)</label>
+                                    <input type="number" value="2" step="1">
+                                </div>
+                            </div>
+                            <button class="btn">Update TX Windstorm Rules</button>
+                        </div>
+                    </div>
+
+                    <div class="config-card">
+                        <h3>Add New State Regulation</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>State</label>
+                                <select>
+                                    <option>California</option>
+                                    <option>Florida</option>
+                                    <option>Texas</option>
+                                    <option>New York</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Regulation Name</label>
+                                <input type="text" placeholder="e.g., Earthquake Preparedness Requirements">
+                            </div>
+                            <div class="form-group">
+                                <label>Regulation Type</label>
+                                <select>
+                                    <option>Natural Disaster</option>
+                                    <option>Consumer Protection</option>
+                                    <option>Market Conduct</option>
+                                    <option>Pricing</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Effective Date</label>
+                                <input type="date">
+                            </div>
+                            <div class="form-group">
+                                <label>Statute Reference</label>
+                                <input type="text" placeholder="e.g., CA Insurance Code 1861.05">
+                            </div>
+                            <div class="form-group">
+                                <label>Regulation Description</label>
+                                <textarea placeholder="Describe the regulation requirements..."></textarea>
+                            </div>
+                        </div>
+                        <button class="btn">Submit New Regulation</button>
+                    </div>
+                </div>
+
+                <div class="content-section" id="underwriter-riskAnalytics">
+                    <div class="section-header">
+                        <h2>Risk Analytics Dashboard</h2>
+                        <p>Monitor risk model performance and premium adequacy.</p>
+                    </div>
+
+                    <div class="config-grid">
+                        <div class="config-card">
+                            <h3>Loss Ratio Analysis</h3>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin: 1.5rem 0;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 2.5rem; font-weight: bold; color: var(--emerald);">78.5%</div>
+                                    <div style="color: var(--text-light);">Current Loss Ratio</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 2.5rem; font-weight: bold; color: var(--warning);">85.0%</div>
+                                    <div style="color: var(--text-light);">Target Loss Ratio</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary">View Detailed Report</button>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Risk Factor Performance</h3>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Risk Factor</th>
+                                        <th>Predictive Power</th>
+                                        <th>Recommendation</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Wildfire Risk Zone</td>
+                                        <td class="status-active">High</td>
+                                        <td>Maintain current weight</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Property Age</td>
+                                        <td class="status-pending">Medium</td>
+                                        <td>Consider weight adjustment</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pool Presence</td>
+                                        <td style="color: var(--danger);">Low</td>
+                                        <td>Review necessity</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="config-card">
+                            <h3>Premium Adequacy by State</h3>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                                <div>California: <span class="status-active">Adequate</span></div>
+                                <div>Florida: <span class="status-pending">Needs Review</span></div>
+                                <div>Texas: <span class="status-active">Adequate</span></div>
+                                <div>New York: <span style="color: var(--danger);">Inadequate</span></div>
+                            </div>
+                            <button class="btn btn-secondary" style="margin-top: 1rem;">Generate Premium Review Report</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section" id="underwriter-notifications">
+                    <div class="section-header">
+                        <h2>Notifications</h2>
+                        <p>Critical underwriting alerts and system updates.</p>
+                    </div>
+
+                    <div class="notification-item warning">
+                        <h4>Risk Model Update Required</h4>
+                        <p>California wildfire risk weights need adjustment based on recent loss experience.</p>
+                        <div class="notification-time">30 minutes ago</div>
+                    </div>
+
+                    <div class="notification-item">
+                        <h4>New Regulation Alert</h4>
+                        <p>Florida has updated hurricane deductible requirements. System update needed.</p>
+                        <div class="notification-time">2 hours ago</div>
+                    </div>
+
+                    <div class="notification-item success">
+                        <h4>Premium Rate Approval</h4>
+                        <p>Your Texas base premium rate increase has been approved by the state regulator.</p>
+                        <div class="notification-time">1 day ago</div>
+                    </div>
+
+                    <div class="notification-item">
+                        <h4>Document Requirement Change</h4>
+                        <p>Agent Martinez has requested exception for wind mitigation report requirement.</p>
+                        <div class="notification-time">2 days ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel" id="notificationPanel">
+        <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="close-notifications" onclick="toggleNotifications()">×</button>
+        </div>
+        <div class="notification-list">
+            <div class="notification-item warning">
+                <h4>Pending Approval Required</h4>
+                <p>Risk factor weight change request needs your review.</p>
+                <div class="notification-time">15 minutes ago</div>
+            </div>
+            <div class="notification-item">
+                <h4>System Update</h4>
+                <p>New tax rates have been deployed for Q1 2025.</p>
+                <div class="notification-time">2 hours ago</div>
+            </div>
+            <div class="notification-item success">
+                <h4>Configuration Approved</h4>
+                <p>Premium rule changes have been successfully implemented.</p>
+                <div class="notification-time">1 day ago</div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Enhanced scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        let currentPortal = null;
+        let currentSection = null;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all animated elements
-        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Enhanced header scroll effect
-        let lastScrollY = window.scrollY;
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            const currentScrollY = window.scrollY;
+        function openPortal(portalType) {
+            // Hide portal selector
+            document.getElementById('portalSelector').style.display = 'none';
             
-            if (currentScrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+            // Show selected portal
+            const portals = ['agentPortal', 'accountManagerPortal', 'underwriterPortal'];
+            portals.forEach(portal => {
+                document.getElementById(portal).classList.remove('active');
+            });
             
-            lastScrollY = currentScrollY;
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Animated counter for stats
-        const animateCounters = () => {
-            const counters = document.querySelectorAll('.stat-number');
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-target'));
-                const increment = target / 100;
-                let current = 0;
-                
-                const updateCounter = () => {
-                    if (current < target) {
-                        current += increment;
-                        counter.textContent = Math.floor(current);
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        counter.textContent = target;
-                    }
-                };
-                
-                updateCounter();
-            });
-        };
-
-        // Trigger counter animation when stats section is visible
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        const statsSection = document.querySelector('.stats');
-        if (statsSection) {
-            statsObserver.observe(statsSection);
+            document.getElementById(portalType + 'Portal').classList.add('active');
+            currentPortal = portalType;
+            
+            // Show default section
+            const defaultSections = {
+                'agent': 'riskFactors',
+                'accountManager': 'pendingApprovals', 
+                'underwriter': 'basePremiumRules'
+            };
+            
+            showSection(portalType, defaultSections[portalType]);
         }
 
-        // Create floating particles
-        const createParticles = () => {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 20;
+        function showPortalSelector() {
+            // Hide all portals
+            const portals = ['agentPortal', 'accountManagerPortal', 'underwriterPortal'];
+            portals.forEach(portal => {
+                document.getElementById(portal).classList.remove('active');
+            });
             
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = particle.style.height = (Math.random() * 4 + 1) + 'px';
-                particle.style.animationDelay = Math.random() * 8 + 's';
-                particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
-                particlesContainer.appendChild(particle);
+            // Show portal selector
+            document.getElementById('portalSelector').style.display = 'flex';
+            currentPortal = null;
+            currentSection = null;
+        }
+
+        function showSection(portalType, sectionName) {
+            if (!currentPortal || currentPortal !== portalType) return;
+            
+            // Hide all sections for this portal
+            const sections = document.querySelectorAll(`#${portalType}Portal .content-section`);
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all nav items
+            const navItems = document.querySelectorAll(`#${portalType}Portal .nav-item`);
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(`${portalType}-${sectionName}`);
+            if (targetSection) {
+                targetSection.classList.add('active');
             }
-        };
+            
+            // Add active class to clicked nav item
+            event.target.closest('.nav-item').classList.add('active');
+            
+            currentSection = sectionName;
+        }
 
-        // Initialize particles
-        createParticles();
+        function toggleNotifications() {
+            const panel = document.getElementById('notificationPanel');
+            panel.classList.toggle('open');
+        }
 
-        // Add loading animation
-        window.addEventListener('load', () => {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease';
+        // Close notification panel when clicking outside
+        document.addEventListener('click', function(event) {
+            const panel = document.getElementById('notificationPanel');
+            const notificationBtn = document.querySelector('.notification-btn');
+            
+            if (panel.classList.contains('open') && 
+                !panel.contains(event.target) && 
+                !notificationBtn.contains(event.target)) {
+                panel.classList.remove('open');
+            }
+        });
+
+        // Simulate real-time updates
+        function simulateNotificationUpdates() {
+            const badges = document.querySelectorAll('.notification-badge');
+            badges.forEach(badge => {
+                const currentCount = parseInt(badge.textContent);
+                if (Math.random() > 0.95) { // 5% chance to add notification
+                    badge.textContent = currentCount + 1;
+                    badge.style.animation = 'pulse 0.5s ease-in-out';
+                    setTimeout(() => badge.style.animation = '', 500);
+                }
+            });
+        }
+
+        // Update notifications every 30 seconds
+        setInterval(simulateNotificationUpdates, 30000);
+
+        // Add form validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const numberInputs = document.querySelectorAll('input[type="number"]');
+            
+            numberInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    const min = parseFloat(this.min);
+                    const max = parseFloat(this.max);
+                    const value = parseFloat(this.value);
+                    
+                    if (!isNaN(min) && value < min) {
+                        this.value = min;
+                        this.style.borderColor = 'var(--warning)';
+                        setTimeout(() => this.style.borderColor = '', 2000);
+                    }
+                    
+                    if (!isNaN(max) && value > max) {
+                        this.value = max;
+                        this.style.borderColor = 'var(--warning)';
+                        setTimeout(() => this.style.borderColor = '', 2000);
+                    }
+                });
+            });
+        });
+
+        // Add button click animations
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('btn')) {
+                event.target.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    event.target.style.transform = '';
+                }, 100);
+            }
+        });
+
+        // Auto-save functionality simulation
+        function simulateAutoSave() {
+            const inputs = document.querySelectorAll('input, select, textarea');
+            
+            inputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    // Show save indicator
+                    const saveIndicator = document.createElement('div');
+                    saveIndicator.textContent = '✓ Saved';
+                    saveIndicator.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: var(--success);
+                        color: white;
+                        padding: 0.5rem 1rem;
+                        border-radius: 8px;
+                        z-index: 10000;
+                        animation: fadeInUp 0.3s ease;
+                    `;
+                    
+                    document.body.appendChild(saveIndicator);
+                    
+                    setTimeout(() => {
+                        saveIndicator.remove();
+                    }, 2000);
+                });
+            });
+        }
+
+        // Initialize auto-save
+        document.addEventListener('DOMContentLoaded', simulateAutoSave);
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            // Escape key closes notification panel
+            if (event.key === 'Escape') {
+                const panel = document.getElementById('notificationPanel');
+                if (panel.classList.contains('open')) {
+                    panel.classList.remove('open');
+                }
+            }
+            
+            // Ctrl/Cmd + S triggers save (prevent default)
+            if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+                event.preventDefault();
+                // Simulate save action
+                const saveEvent = new Event('change', { bubbles: true });
+                document.activeElement.dispatchEvent(saveEvent);
+            }
+        });
+
+        // Add loading states for buttons
+        function addLoadingState(button, duration = 2000) {
+            const originalText = button.textContent;
+            button.textContent = 'Processing...';
+            button.disabled = true;
+            
             setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-        });
+                button.textContent = originalText;
+                button.disabled = false;
+            }, duration);
+        }
 
-        // Enhanced button hover effects
-        document.querySelectorAll('.cta-button').forEach(button => {
-            button.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-3px) scale(1.02)';
-            });
-            
-            button.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Add parallax effect to hero section
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
-            const heroPattern = document.querySelector('.islamic-pattern-1');
-            if (heroPattern) {
-                heroPattern.style.transform = `translateY(${rate}px)`;
+        // Apply loading states to action buttons
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('btn') && 
+                !event.target.classList.contains('btn-secondary') &&
+                !event.target.classList.contains('back-btn')) {
+                addLoadingState(event.target);
             }
         });
+
+        // Add data export functionality
+        function exportToCSV(tableId, filename) {
+            const table = document.getElementById(tableId);
+            if (!table) return;
+            
+            const rows = Array.from(table.querySelectorAll('tr'));
+            const csv = rows.map(row => {
+                const cells = Array.from(row.querySelectorAll('th, td'));
+                return cells.map(cell => `"${cell.textContent.trim()}"`).join(',');
+            }).join('\n');
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename || 'export.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Add search functionality
+        function addSearchToTables() {
+            const tables = document.querySelectorAll('.data-table');
+            
+            tables.forEach(table => {
+                const searchContainer = document.createElement('div');
+                searchContainer.style.cssText = 'margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center;';
+                
+                const searchInput = document.createElement('input');
+                searchInput.type = 'text';
+                searchInput.placeholder = 'Search table...';
+                searchInput.style.cssText = `
+                    padding: 0.8rem;
+                    border: 2px solid var(--cream);
+                    border-radius: 8px;
+                    flex: 1;
+                `;
+                
+                const exportBtn = document.createElement('button');
+                exportBtn.textContent = 'Export CSV';
+                exportBtn.className = 'btn btn-secondary';
+                exportBtn.onclick = () => exportToCSV(table.id, 'table-export.csv');
+                
+                searchContainer.appendChild(searchInput);
+                searchContainer.appendChild(exportBtn);
+                table.parentNode.insertBefore(searchContainer, table);
+                
+                // Search functionality
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    const rows = table.querySelectorAll('tbody tr');
+                    
+                    rows.forEach(row => {
+                        const text = row.textContent.toLowerCase();
+                        row.style.display = text.includes(searchTerm) ? '' : 'none';
+                    });
+                });
+            });
+        }
+
+        // Initialize search functionality when DOM is loaded
+        document.addEventListener('DOMContentLoaded', addSearchToTables);
     </script>
 </body>
 </html>
